@@ -12,10 +12,10 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
 1. You will need two input files: one file contains intra-chromosome looping fragment pairs(cis pairs), and another contains inter-chromosome looping fragment pairs(trans pairs).
     - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
        _frag_id_1    frag_id_2    observed_reads_count    distance_between_two_fragments<br/>_
-       See sample files here: http://hiview.case.edu/test/sample/frag_loop.IMR90.cis.sample
+       See sample file here: http://hiview.case.edu/test/sample/frag_loop.IMR90.cis.sample
     - Inter-chromosome looping piars need to have 3 tab-delimited columns, in the following format:<br/>
        _frag_id_1    frag_id_2    observed_reads_count<br/>_
-        See sample files here: http://hiview.case.edu/test/sample/frag_loop.IMR90.trans.sample
+        See sample file here: http://hiview.case.edu/test/sample/frag_loop.IMR90.trans.sample
     - These two files needs to be sorted before you run the pipeline (sort -k1 -k2).
     - If you have a bam file and need help generate the fragment-pair files, we have a pipeline included. Go to the "bin" folder, find the script named "bam_to_frag_loop.sh". Before you run, replace "PATH_TO_REF" and "PATH_TO_BIN" with the pathes to "ref_hg19" and "bin" correspondingly. Then run the pipeline: <br/>./bam_to_frag_loop.sh <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> 
 
@@ -24,3 +24,7 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
 ##### Options
 * _--no-GC-map_ <br/>
  If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result.
+
+The final result will be an anchor-to-anchor looping pairs file, which has 5 columns:
+   _anchor_id_1   anchor_id_2 obserced_reads_count expected_reads_count p_value_
+See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample

@@ -1,5 +1,5 @@
 # HiCorr
-HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19, mm10 to be added.
+HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
 
 ### How to setup
 1. Download everything into your local machine.
@@ -20,7 +20,7 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
     - If you have a bam file and need help generate the fragment-pair files, we have a pipeline included. Go to the "bin" folder, find the script named "bam_to_frag_loop.sh". Before you run, replace "PATH_TO_REF" and "PATH_TO_BIN" with the pathes to "ref_hg19" and "bin" correspondingly. Then run the pipeline: <br/>./bam_to_frag_loop.sh <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> 
 
 2. Finally, run the pipeline:<br/>
- ```./HiCorr.sh <cis_loop_file> <trans_loop_file> <name_of_your_data> [options]``` <br/>
+ ```./HiCorr.sh <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]``` <br/>
 ##### Options
 * _--no-GC-map_ <br/>
  If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result.

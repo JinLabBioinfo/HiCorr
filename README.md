@@ -28,5 +28,5 @@ HiCorr is a pipeline designed to normalize Hi-C data. It needs to be run in an u
 
 ### Output
 The final result will be an anchor-to-anchor looping pairs file, which has 5 columns:<br/>
-     _anchor_id_1   anchor_id_2 obserced_reads_count expected_reads_count p_value_ <br/>
+     <table><tr><td>_anchor_id_1</td><td>anchor_id_2</td> <td>obserced_reads_count</td> <td>expected_reads_count</td> <td>p_value_ </td></tr></table>
 See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample

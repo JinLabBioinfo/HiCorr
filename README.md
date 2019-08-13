@@ -25,6 +25,7 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
 * _--no-GC-map_ <br/>
  If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result.
 
-The final result will be an anchor-to-anchor looping pairs file, which has 5 columns:
+### Output
+The final result will be an anchor-to-anchor looping pairs file, which has 5 columns:<br/>
    _anchor_id_1   anchor_id_2 obserced_reads_count expected_reads_count p_value_
 See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample

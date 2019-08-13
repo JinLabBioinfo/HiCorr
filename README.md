@@ -1,5 +1,5 @@
 # HiCorr
-This is a pipeline designed to normalize HiC data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19, mm10 to be added.
+HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19, mm10 to be added.
 
 ### How to setup
 1. Download everything into your local machine.

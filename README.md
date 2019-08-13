@@ -18,7 +18,7 @@ HiCorr is a pipeline designed to normalize Hi-C data. It needs to be run in an u
       <table><tr><td>frag_id_1</td> <td>frag_id_2</td> <td>observed_reads_count</td> </tr>  </table>
         See sample file here: http://hiview.case.edu/test/sample/frag_loop.IMR90.trans.sample
     - These two files needs to be sorted before you run the pipeline (sort -k1 -k2).
-    - **If you have a bam file and need help generate the fragment-pair files, we have a pipeline included.** Go to the "bin" folder, find the script named "bam_to_frag_loop.sh". Before you run, replace "PATH_TO_REF" and "PATH_TO_BIN" with the pathes to "ref_hg19" and "bin" correspondingly. Then run the pipeline: <br/>./bam_to_frag_loop.sh <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> 
+    - **If you have a bam file and need help generate the fragment-pair files, we have a pipeline included.** Go to the "bin" folder, find the script named "bam_to_frag_loop.sh". Before you run, replace "PATH_TO_REF" and "PATH_TO_BIN" with the pathes to "ref" and "bin" correspondingly. Then run the pipeline: <br/>./bam_to_frag_loop.sh <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> 
 
 2. Finally, run the pipeline:<br/>
  ```./HiCorr.sh <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]``` <br/>

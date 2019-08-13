@@ -32,7 +32,7 @@ if [$4="--no-GC-map"];then
         $bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/group.frag_length.range $ref/hg19.frag.length.map $ref/trans.group.count.by.length 0.2 >avg_trans_count.by.length_group
         $bin/get_corr_factor_by_GC.pl avg_trans_count.by.length_group > lambda_correction.by.length_group 
         $bin/sum_frag_reads_no.py $ref/hg19.frag.length.map lambda_correction.by.length_group $ref/group.frag_length $name.trans_loop.without.blacklist >frag.trans.reads.sum
-        $bin/test_frag_corr_no.py frag.trans.reads.sum $ref/hg19.frag.gc.map $name.loop.after_GC >$name.loop.after_vis
+        $bin/test_frag_corr_no.py frag.trans.reads.sum $ref/hg19.frag.gc.map $name.loop.after_length_dist >$name.loop.after_vis
 else
         $bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/group.frag_length.range $ref/hg19.frag.length.map $ref/trans.group.count.by.length 0.2 >avg_trans_count.by.length_group
         $bin/get_corr_factor_by_GC.pl avg_trans_count.by.length_group > lambda_correction.by.length_group

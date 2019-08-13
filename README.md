@@ -5,7 +5,7 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
 1. Download everything into your local machine.
 2. Go to the directory "ref", uncompress all the gz files, then run the script: <br/>
    ./prep_ref.sh <reference_genome>
-3. Go back to the main directory, edit "run.sh":
+3. Go back to the main directory, edit "HiCorr.sh":
    - Line 3: Replace "PATH_TO_REF" with the path to your directory "ref"
    - Line 4: Replace "PATH_TO_BIN" with the path to your directory "bin"
 

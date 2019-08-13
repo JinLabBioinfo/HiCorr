@@ -20,4 +20,4 @@ This is a pipeline designed to normalize HiC data. It needs to be run in an unix
     - If you have a bam file and need help generate the fragment-pair files, we have a pipeline included. Go to the "bin" folder, find the script named "bam_to_frag_loop.sh". Before you run, replace "PATH_TO_REF" and "PATH_TO_BIN" with the pathes to "ref_hg19" and "bin" correspondingly. Then run the pipeline: <br/>./bam_to_frag_loop.sh <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> 
 
 2. Finally, run the pipeline:<br/>
- ```./HiCorr.sh <cis_loop_file> <trans_loop_file> <name_of_your_data>```
+ ```./HiCorr.sh <cis_loop_file> <trans_loop_file> <name_of_your_data> [options]```

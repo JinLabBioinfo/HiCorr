@@ -3,9 +3,9 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
 
 ### How to setup
 1. Download everything into your local machine.
-2. Go to the directory "ref_hg19", uncompress all the gz files, then run the script "prep_ref.sh"
+2. Go to the directory "ref", uncompress all the gz files, then run the script "prep_ref.sh"
 3. Go back to the main directory, edit "run.sh":
-   - Line 3: Replace "PATH_TO_REF" with the path to your directory "ref_hg19"
+   - Line 3: Replace "PATH_TO_REF" with the path to your directory "ref"
    - Line 4: Replace "PATH_TO_BIN" with the path to your directory "bin"
 
 ### To run the pipeline

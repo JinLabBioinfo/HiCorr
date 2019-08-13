@@ -21,3 +21,6 @@ HiCorr is a pipeline designed to normalize HiC data. It needs to be run in an un
 
 2. Finally, run the pipeline:<br/>
  ```./HiCorr.sh <cis_loop_file> <trans_loop_file> <name_of_your_data> [options]```
+#####Options
+*_--no-GC-map_
+            *If --no-GC-map is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result.

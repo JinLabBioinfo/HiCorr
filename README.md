@@ -10,7 +10,7 @@ How to setup
 
 To run the pipeline
 1. You will need two input files: one file contains intra-chromosome looping fragment pairs(cis pairs), and another contains inter-chromosome looping fragment pairs(trans pairs).
-2. Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:
+2. Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:\n
     frag_id_1    frag_id_2    observed_reads_count    distance_between_two_fragments
     See sample files here: http://hiview.case.edu/test/sample/frag_loop.IMR90.cis.sample
 3. Inter-chromosome looping piars need to have 3 tab-delimited columns, in the following format:

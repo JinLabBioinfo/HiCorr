@@ -43,9 +43,9 @@ fi
 rm $name.loop.after_GC frag.trans.reads.sum avg_trans_count.by.length_group lambda_correction.by.GC_group lambda_correction.by.length_group
 
 #---------------------------------------Model Evaluation------------------------------------------------------------------------------------#
-$bin/split_list_by_group.pl $ref/lambda_group.tab $name.loop.after_vis
-R --vanilla < model_fit.r
-rm data_list.group.* hist.group.*
+#$bin/split_list_by_group.pl $ref/lambda_group.tab $name.loop.after_vis
+#R --vanilla < model_fit.r
+#rm data_list.group.* hist.group.*
 
 #--------------------------------------Cal P_val and merge to anchor----------------------------------------------------------------------------#
 ln -s $ref/$genome.HindIII.frag.bed

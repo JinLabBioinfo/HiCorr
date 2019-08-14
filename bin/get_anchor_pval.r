@@ -1,5 +1,6 @@
 # NEED TO UPDATE THIS SLOPE VALUE EVERY TIME
-slope <- as.numeric(read.table("slope_value.tab"))
+#slope <- as.numeric(read.table("slope_value.tab"))
+slope <- 2
 
 data <- read.table("FILE", col.names=c("gid1", "gid2", "val", "rand"))
 attach(data)

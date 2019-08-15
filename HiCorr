@@ -10,7 +10,7 @@ elif [ $1 = "DPNII" ];then
 elif [ $1 = "eHiC" ];then
 
 elif [ $1 = "heatmap" ];then
-  $bin/draw_heatmap.sh $2 $3 $4 $5 $bin $ref $6
+  $bin/draw_heatmap.sh $2 $3 $4 $5 $ref $bin $6
 elif [ $1 = "process-bam" ];then
   $bin/bam_to_frag_loop.sh $2 $3 $4 $ref $bin
 else

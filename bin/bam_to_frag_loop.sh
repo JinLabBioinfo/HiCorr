@@ -4,8 +4,8 @@ bam_file=$1
 name=$2
 rdlen=$3	#read length
 
-ref=PATH_TO_REF
-bin=PATH_TO_BIN
+ref=$4
+bin=$5
 
 samtools view $bam_file | cut -f2-8 | $bin/bam_to_temp_HiC.pl | $bin/reads_2_cis_frag_loop.pl $ref/hg19.HindIII.frag.bed $rdlen $name.loop.inward $name.loop.outward $name.loop.samestrand $name &
 samtools view $bam_file | cut -f2-8 | $bin/bam_to_temp_HiC.pl | $bin/reads_2_trans_frag_loop.pl $ref/hg19.HindIII.frag.bed $rdlen $name.loop.trans &

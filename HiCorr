@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ref=PATH_TO_REF
+bin=PATH_TO_BIN
+
+if [ $1 = "HindIII" ];then
+
+elif [ $1 = "DPNII" ];then
+
+elif [ $1 = "eHiC" ];then
+
+elif [ $1 = "heatmap" ];then
+  $bin/draw_heatmap.sh $2 $3 $4 $5 $bin $ref $6
+else
+  echo "Wrong mode entered. Please refer to manual and re-enter"
+fi

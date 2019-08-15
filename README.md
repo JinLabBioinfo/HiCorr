@@ -1,11 +1,11 @@
 # HiCorr
-HiCorr is a pipeline designed to normalize Hi-C data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
+HiCorr is a pipeline designed to normalize and visualize Hi-C/eHi-C data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
 
 ### How to setup
 1. Download everything into your local machine.
 2. Go to the directory "ref", uncompress all the gz files, then run the script: <br/>
    ./prep_ref.sh <reference_genome>
-3. Go back to the main directory, edit "HiCorr.sh":
+3. Go back to the main directory, edit "HiCorr":
    - Line 3: Replace "PATH_TO_REF" with the path to your directory "ref"
    - Line 4: Replace "PATH_TO_BIN" with the path to your directory "bin"
 

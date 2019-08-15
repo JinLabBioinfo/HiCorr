@@ -4,7 +4,7 @@ ref=PATH_TO_REF
 bin=PATH_TO_BIN
 
 if [ $1 = "HindIII" ];then
-
+  $bin/HindIII.sh $ref $bin $2 $3 $4 $5 
 elif [ $1 = "DPNII" ];then
 
 elif [ $1 = "eHiC" ];then

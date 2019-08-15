@@ -1,12 +1,11 @@
 #!/bin/bash
 
-ref=PATH_TO_REF
-bin=PATH_TO_BIN
-
 cis_loop=$1
 trans_loop=$2
 name=$3
 genome=$4
+ref=$5
+bin=$6
 
 #----------------------------------------Distance & Length Correction-----------------------------------------------------------------------#
 cat $cis_loop | awk '{if($4<=2000000)print $0}' | $bin/merge_sorted_frag_loop.pl - $ref/$genome.within_2Mb.frag_pair >frag_loop.$name.within_2Mb.without.blacklist.full

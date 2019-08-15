@@ -1,15 +1,16 @@
 #!/bin/bash
 
-cis_loop=$1
-trans_loop=$2
-name=$3
-genome=$4
-ref=$5
-bin=$6
+ref=$1
+bin=$2
+cis_loop=$3
+trans_loop=$4
+name=$5
+genome=$6
+
 
 #----------------------------------------Distance & Length Correction-----------------------------------------------------------------------#
 cat $cis_loop | awk '{if($4<=2000000)print $0}' | $bin/merge_sorted_frag_loop.pl - $ref/$genome.within_2Mb.frag_pair >frag_loop.$name.within_2Mb.without.blacklist.full
-if [ $5 = "--no-GC-map" ];then
+if [ $6 = "--no-GC-map" ];then
         $bin/get_group_statistics_no.pl frag_loop.$name.within_2Mb.without.blacklist.full $ref/$genome.HindIII.frag.bed $ref/$genome.group.frag_length.range $ref/group.frag_dist.range >loop_statistics.by_group.without.blacklist
         $bin/get_loop_lambda.pl frag_loop.$name.within_2Mb.without.blacklist.full $ref/$genome.HindIII.frag.bed $ref/$genome.group.frag_length.range $ref/group.frag_dist.range loop_statistics.by_group >$name.loop.after_length_dist
         rm frag_loop.$name.within_2Mb.without.blacklist.full loop_statistics.by_group.without.blacklist
@@ -28,7 +29,7 @@ fi
 
 
 #---------------------------------------Visibility Correction--------------------------------------------------------------------------------#
-if [ $5 = "--no-GC-map" ];then
+if [ $6 = "--no-GC-map" ];then
         $bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.group.frag_length.range $ref/$genome.frag.length.map $ref/trans.group.count.by.length 0.2 >avg_trans_count.by.length_group
         $bin/get_corr_factor_by_GC.pl avg_trans_count.by.length_group > lambda_correction.by.length_group 
         $bin/sum_frag_reads_no.py $ref/$genome.frag.length.map lambda_correction.by.length_group $ref/$genomegroup.frag_length $name.trans_loop.without.blacklist >frag.trans.reads.sum

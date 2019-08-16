@@ -18,11 +18,11 @@ name=$region.r
 sed "s/REGION/$region/g" $bin/template.r >$name
 sed -i "s/START/$start/g" $name
 sed -i "s/END/$end/g" $name
-if [ $7 = "raw" ];then
+if [ $7 = "-raw" ];then
 	R --vanilla < $name matrix.obs
-elif [ $7 = "expected" ];then
+elif [ $7 = "-expected" ];then
 	R --vanilla < $name matrix.expected
-elif [ $7 = "ratio" ];then
+elif [ $7 = "-ratio" ];then
 	R --vanilla < $name matrix.ratio
 else
 	R --vanilla < $name matrix.obs

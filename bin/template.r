@@ -14,9 +14,11 @@ end <- Loc[ind.grid[length(ind.grid)]]
 x <- c(START,END)
 y <- c(START,END)
 
+rotate <- function(x) t(apply(x, 2, rev))
 n <- 20
 col <- rgb(1,(n-2):0/(n-1),(n-2):0/(n-1))
 draw_heatmap <- function(matrix,name,color_scale){
+	matrix <- rotate(matrix)
 	if (color_scale!= 0){
         	breaks <- c(seq(1.001,color_scale,(color_scale-1.001)/18),max(matrix))
         }else{

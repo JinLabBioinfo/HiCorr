@@ -47,12 +47,12 @@ To run the HindIII mode:<br/>
 ### eHiC
 
 ### Heatmap
-Heatmap mode generates Hi-C heatmaps of a certain region you choosed. This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
+Heatmap mode generates Hi-C heatmaps of a certain region you choosed(up to 2,000,000bp). This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
 To run the Heatmap mode: <br/>
    ```./HiCorr Heatmap <chr> <start> <end> <anchor_loop_file> [option]```
 #### Options
 *  _Default_ <br/>
-   By defult, heatmap mode will generates 3 heatmaps for the region(up to 2,000,000bp) you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps then you do not need to enter any option.
+   By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps then you do not need to enter any option.
 * _-raw_ <br/>
    Only generates a raw heatmap of observed reads
 * _-expected_ <br/>

@@ -52,7 +52,7 @@ To run the Heatmap mode: <br/>
    ```./HiCorr Heatmap <chr> <start> <end> <anchor_loop_file> [option]```
 #### Options
 *  _Default_ <br/>
-   By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps then you do not need to enter any option.
+   By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps, leave the option as blank.
 * _-raw_ <br/>
    Only generates a raw heatmap of observed reads
 * _-expected_ <br/>

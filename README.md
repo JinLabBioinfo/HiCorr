@@ -40,11 +40,22 @@ HindIII mode run the normalization of HindIII Hi-C data. It takes two fragment-p
 
 To run the HindIII mode:<br/>
    ```./HiCorr HindIII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
- #### Options
+#### Options
  * _--no-GC-map_ <br/> 
       If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result. 
 
 ### eHiC
 
 ### Heatmap
-Heatmap mode generates heatmaps of a certain region you choosed.
+Heatmap mode generates Hi-C heatmaps of a certain region you choosed. This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
+To run the Heatmap mode: <br/>
+   ```./HiCorr Heatmap <chr> <start> <end> <anchor_loop_file> [option]```
+#### Options
+*  _Default_ <br/>
+   By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps then you do not need to enter any option.
+* _-raw
+   Only generates a raw heatmap of observed reads
+* _-expected
+   Only generates a heatmap of expected reads
+* _-ratio
+   Only generates a normalized heatmap

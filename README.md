@@ -14,13 +14,13 @@ Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
 <br/>
-**_HiCorr has 4 different modes: bam-process, HindIII, eHiC and heatmap_**
+**_HiCorr has 4 different modes: Bam-process, HindIII, eHiC and Heatmap_**
 
-### bam-process
+### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs, which are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>
 This mode currently is only able to process bam file of HindIII Hi-C data. <br/>
-To run the bam-process mode, you need 4 arguments:<br/>
-   ```./HiCorr bam-process <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> ```
+To run the Bam-process mode, you need 4 arguments:<br/>
+   ```./HiCorr Bam-process <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> ```
 <br/>
 
 ### HindIII
@@ -36,9 +36,9 @@ The two input files: one file contains intra-chromosome looping fragment pairs(c
    - If you do not know how to generate these two files, please take a look at our bam-process mode.
 The final result of HindIII mode is an anchor-to-anchor looping pairs file, which has 5 columns:<br/>
      <table><tr><td>anchor_id_1</td><td>anchor_id_2</td> <td>obserced_reads_count</td> <td>expected_reads_count</td> <td>p_value_ </td></tr></table>
-See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample <br/>
+See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample <br/><br/>
 To run the HindIII mode:<br/>
-   ```./HiCorr HindIII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]``` <br/>
+   ```./HiCorr HindIII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
  #### Options
  * _--no-GC-map_ <br/> 
       If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result. 

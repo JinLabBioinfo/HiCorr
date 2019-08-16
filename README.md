@@ -53,9 +53,9 @@ To run the Heatmap mode: <br/>
 #### Options
 *  _Default_ <br/>
    By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps then you do not need to enter any option.
-* _-raw
+* _-raw_ <br/>
    Only generates a raw heatmap of observed reads
-* _-expected
+* _-expected_ <br/>
    Only generates a heatmap of expected reads
-* _-ratio
+* _-ratio_ <br/>
    Only generates a normalized heatmap

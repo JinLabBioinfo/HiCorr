@@ -6,12 +6,12 @@ bin=PATH_TO_BIN
 if [ $1 = "HindIII" ];then
   $bin/HindIII.sh $ref $bin $2 $3 $4 $5 
 elif [ $1 = "DPNII" ];then
-
+  echo "We are currently developing DPNII Hi-C processing pipeline"
 elif [ $1 = "eHiC" ];then
 
-elif [ $1 = "heatmap" ];then
+elif [ $1 = "Heatmap" ];then
   $bin/draw_heatmap.sh $2 $3 $4 $5 $ref $bin $6
-elif [ $1 = "process-bam" ];then
+elif [ $1 = "Bam-process" ];then
   $bin/bam_to_frag_loop.sh $2 $3 $4 $ref $bin
 else
   echo "Wrong mode entered. Please refer to manual and re-enter"

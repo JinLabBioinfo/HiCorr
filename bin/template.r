@@ -11,8 +11,12 @@ ind.matrix <- Index[Loc >= START & Loc <= END]
 ind.grid <- c(ind.matrix[1] -1, ind.matrix)
 beg <- Loc[ind.grid[1]]
 end <- Loc[ind.grid[length(ind.grid)]]
-x <- c(START,END)
-y <- c(START,END)
+gap <- Loc[ind.matrix]-Loc[ind.matrix][1]
+tmp <- Loc[ind.matrix[2:107]]-Loc[ind.matrix[1:106]]
+y_Loc <- (Loc[1])
+for(x in rev(tmp)){y_Loc <- c(y_Loc,y_Loc[length(y_Loc)]+x)}
+x <- c(Loc[1],Loc[length(Loc)])
+y <- c(y_Loc[length(y_Loc)],y_Loc[1])
 
 rotate <- function(x) t(apply(x, 2, rev))
 n <- 20
@@ -37,13 +41,13 @@ draw_heatmap <- function(matrix,name,color_scale){
 	pdf_name <- paste(name,"pdf",sep=".")
 	pdf(pdf_name)
 	par(mar=c(0,0,0,0))
-	image(Loc[ind.grid], Loc[ind.grid], matrix, zlim=c(1, 50), col=col, breaks=breaks,xaxt="n",yaxt="n",xlab="",ylab="")
+	image(Loc[ind.grid], y_Loc, matrix, zlim=c(1, 50), col=col, breaks=breaks,xaxt="n",yaxt="n",xlab="",ylab="")
 	lines(x,y)
 	dev.off()
 	png_name <- paste(name,"png",sep=".")
 	png(png_name)
 	par(mar=c(0,0,0,0))
-	image(Loc[ind.grid], Loc[ind.grid], matrix, zlim=c(1, 50), col=col, breaks=breaks,xaxt="n",yaxt="n",xlab="",ylab="")
+	image(Loc[ind.grid], y_Loc, matrix, zlim=c(1, 50), col=col, breaks=breaks,xaxt="n",yaxt="n",xlab="",ylab="")
 	lines(x,y)
 	dev.off()
 }

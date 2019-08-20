@@ -24,7 +24,7 @@ To run the Bam-process mode, you need 4 arguments:<br/>
 <br/>
 
 ### HindIII
-HindIII mode run the normalization of HindIII Hi-C data. It takes two fragment-pair files as input and outputs an anchor_pair file. <br/>
+HindIII normalizes HindIII Hi-C data. It takes two fragment-pair files as input and outputs an anchor_pair file. <br/>
 - The two input files: one file contains intra-chromosome looping fragment pairs(cis pairs), and another contains inter-chromosome looping fragment pairs(trans pairs).
    - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
        <table><tr><td>frag_id_1</td> <td>frag_id_2</td> <td>observed_reads_count</td> <td>distance_between_two_fragments</td></tr>  </table>
@@ -45,7 +45,21 @@ To run the HindIII mode:<br/>
       If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result. 
 
 ### eHiC
-
+eHiC mode normalizes eHi-C data. It takes two fragment-end-pair files as input and outputs an anchor_pair file. <br/>
+- The two input files: one file contains intra-chromosome looping fragment-end pairs(cis pairs), and another contains inter-chromosome looping fragment-end pairs(trans pairs).
+   - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
+       <table><tr><td>frag_end_id_1</td> <td>frag_end_id_2</td> <td>observed_reads_count</td> <td>distance_between_two_fragments</td></tr>  </table>
+       See sample file here: 
+   - Inter-chromosome looping piars need to have 3 tab-delimited columns, in the following format:<br/>
+      <table><tr><td>frag_end_id_1</td> <td>frag_end_id_2</td> <td>observed_reads_count</td> </tr>  </table>
+        See sample file here: 
+   - These two files needs to be sorted before you run the pipeline (sort -k1 -k2).
+- The final result of HindIII mode is an anchor-to-anchor looping pairs file, which has 5 columns:<br/>
+     <table><tr><td>anchor_id_1</td><td>anchor_id_2</td> <td>obserced_reads_count</td> <td>expected_reads_count</td> <td>p_value_ </td></tr></table>
+   See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample <br/>
+To run the eHiC mode:<br/>
+   ```./HiCorr eHiC <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome>```
+   
 ### Heatmap
 Heatmap mode generates Hi-C heatmaps of a certain region you choosed(up to 2,000,000bp). This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
 <br/>

@@ -8,7 +8,7 @@ if [ $1 = "HindIII" ];then
 elif [ $1 = "DPNII" ];then
   echo "We are currently developing DPNII Hi-C processing pipeline"
 elif [ $1 = "eHiC" ];then
-
+  $bin/eHiC.sh $ref $bin $2 $3 $4
 elif [ $1 = "Heatmap" ];then
   $bin/draw_heatmap.sh $2 $3 $4 $5 $ref $bin $6
 elif [ $1 = "Bam-process" ];then

@@ -1,6 +1,9 @@
 # HiCorr
 HiCorr is a pipeline designed to normalize and visualize Hi-C/eHi-C data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
 
+If you use HiCorr, please site:<br/>
+_Lu,L. et al._ Robust Hi-C chromatin loop maps in human neurogenesis and brain tissues at high-resolution. bioRxiv 744540; doi: https://doi.org/10.1101/744540
+
 ## How to setup
 1. Download everything into your local machine.
 2. Go to the directory "ref", uncompress all the gz files, then run the script: <br/>

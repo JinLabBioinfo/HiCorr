@@ -2,7 +2,7 @@
 
 # Copyright 2019 Jin Lab
 
-# The script is used to perform the 4-base cutter Hi-C data, processing from the raw fastq data.
+# The script is used to perform the 4-base cutter Hi-C data, processing from the raw data (.fastq).
 
 # [topDir]/fastq - Should contain the fastq files. This code assumes that there is "_R.fastq "
 #		  inside the folder. i.e. *_R*.fastq

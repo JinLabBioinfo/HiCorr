@@ -43,6 +43,22 @@ HindIII normalizes HindIII Hi-C data. It takes two fragment-pair files as input 
 
 To run the HindIII mode:<br/>
    ```./HiCorr HindIII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
+   
+### DpnII/Mbol
+
+DpnII/Mbol normalizes DpnII/Mbol digested Hi-C data. This pipelines is able to process data form the very beginning, eg. .fastq files to the ultimately normalized files. <br/>
+
+The parameters for user to input are listed below. <br/>
+
+- The dictionary where the script folder locates. <br/>
+- The path where Bowtie locates. <br/>
+   We did test a few different mapping tools, BWA and bowtie, and compared the mapping efficiency and accurracy. It turns out that Bowtie is more strict than BWA. <br/>
+- The genome of your Hi-C data, eg. hg19 or mm10. (Currently, we only provide mm10 and hg19) <br/>
+- The path where the folder named fastq locates. We restrict that the data (.fastq file) must within a folder named fastq. The user is required to provide the where the fastq folder is, in other word, the data's parent folder. <br/>
+
+To run the DpnII/Mbol mode: <br/>
+```./HiCorr DpnII <Parent_Path_of_Script> <Bowtie_Path> <Genome Type> <Parent_Path_of_Fastq_file>```
+
 #### Options
  * _--no-GC-map_ <br/> 
       If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result. 

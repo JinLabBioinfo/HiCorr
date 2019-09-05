@@ -7,8 +7,8 @@ name=$5
 genome=$6
 
 #-----------------------------------------------distance & length---------------------------------------------------------------------------------#
-$bin/remove_outlier_ELPU.py $ref/$genome.blacklist.ends $cis | ./remove_ends_without_HD.py $ref/$genome.frag.end.GC.map | awk '{if($4<=2000000)print $0}' >$name.loop.within_2Mb.filtered
-$bin/merge_and_resort_end_loop.py $ref/$genome.HindIII.frag.ends.bed $name.loop.within_2Mb.filtered $genome.end_pairs.within_2Mb.filtered >end_loop.$name.within_2Mb.full
+$bin/remove_outlier_ELPU.py $ref/$genome.blacklist.ends $cis_loop | ./remove_ends_without_HD.py $ref/$genome.frag.end.GC.map | awk '{if($4<=2000000)print $0}' >$name.loop.within_2Mb.filtered
+$bin/merge_and_resort_end_loop.py $ref/$genome.HindIII.frag.ends.bed $name.loop.within_2Mb.filtered $ref/$genome.end_pairs.within_2Mb.filtered >end_loop.$name.within_2Mb.full
 $bin/get_group_statistics.pl end_loop.$name.within_2Mb.full $ref/$genome.HindIII.frag.ends.bed $ref/$genome.group.frag_length.range $ref/group.frag_dist.range $ref/$genome.frag.end.GC.map >loop_statistics.by_group.$name
 rm $name.loop.within_2Mb.filtered
 

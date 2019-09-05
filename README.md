@@ -17,7 +17,7 @@ Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
 <br/>
-**_HiCorr has 4 different modes: Bam-process, HindIII, eHiC and Heatmap_**
+**_HiCorr has 4 different modes: Bam-process, HindIII, DPNII, eHiC and Heatmap_**
 
 ### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs. The two output files are the required input files when using the HiCorr HindIII mode. The two output files are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>
@@ -44,7 +44,7 @@ HindIII normalizes HindIII Hi-C data. It takes two fragment-pair files as input 
 To run the HindIII mode:<br/>
    ```./HiCorr HindIII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
    
-### DpnII/Mbol
+### DpnII/Mbol(beta version)
 
 DpnII/Mbol normalizes DpnII/Mbol digested Hi-C data. This pipelines is able to process data form the very beginning, eg. .fastq files to the ultimately normalized files. <br/>
 

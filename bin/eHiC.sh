@@ -1,24 +1,38 @@
 #!/bin/bash
-
-ref=$1
-bin=$2
-cis_loop=$3
-trans_loop=$4
-name=$5
-genome=$6
+ref=/mnt/NFS/homeGene/JinLab/xxl244/lib/eHiC
+bin=/mnt/NFS/homeGene/JinLab/xxl244/lib/eHiC
+cis_loop=$1
+trans_loop=$2
+name=$3
+genome=$4
 
 #-----------------------------------------------distance & length---------------------------------------------------------------------------------#
-$bin/merge_and_resort_end_loop.py $ref/$genome.HindIII.frag.ends.bed $cis $genome.end_pairs.within_2Mb.filtered >end_loop.$name.within_2Mb.full
-$bin/get_group_statistics.pl end_loop.$name.within_2Mb.full $ref/$genome.HindIII.frag.ends.bed $ref/group.frag_length.range $ref/group.frag_dist.range $ref/$genome.frag.end.GC.map >loop_statistics.by_group.$name
-$bin/get_loop_lambda.pl end_loop.$name.within_2Mb.full $ref/$genome.HindIII.frag.ends.bed $ref/$genome.frag.end.GC.map $ref/group.frag_length.range $ref/group.frag_dist.range loop_statistics.by_group.$name >$name.loop.between.end.after_length_dist
-rm end_loop.$name.within_2Mb.full loop_statistics.by_group.$name
+$bin/remove_outlier_ELPU.py $ref/$genome.blacklist.ends $cis | ./remove_ends_without_HD.py hg19.frag.end.GC.map | awk '{if($4<=2000000)print $0}' >$name.loop.within_2Mb.filtered
+$bin/merge_and_resort_end_loop.py $ref/$genome.HindIII.frag.ends.bed $name.loop.within_2Mb.filtered $genome.end_pairs.within_2Mb.filtered >end_loop.$name.within_2Mb.full
+$bin/get_group_statistics.pl end_loop.$name.within_2Mb.full $ref/$genome.HindIII.frag.ends.bed $ref/$genome.group.frag_length.range $ref/group.frag_dist.range $ref/$genome.frag.end.GC.map >loop_statistics.by_group.$name
+rm $name.loop.within_2Mb.filtered
 
 #---------------------------------------------GC content------------------------------------------------------------------------------------------#
-cat $trans_loop | $ref/remove_outlier.py $ref/$genome.blacklist.end >$name.trans_loop.without.blacklist
-$bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/group.frag_GC.range $ref/$genome.frag.end.GC.map $ref/trans.group.count.by.GC 0.2 >avg_trans_count.by.GC_group
-$bin/get_corr_factor_by_GC.pl avg_trans_count.by.GC_group > lambda_correction.by.GC_group
-$bin/get_loop_lambda_GC_correct.pl $name.loop.between.end.after_length_dist $ref/group.frag_GC.range $ref/$genome.frag.end.GC.map lambda_correction.by.GC_group >$name.loop.between.end.after_GC
-rm $name.loop.between.end.after_length_dist avg_trans_count.by.GC_group
+cat $trans_loop | $ref/remove_outlier.py $ref/$genome.blacklist.ends >$name.trans_loop.without.blacklist
+$bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.group.frag_GC.range $ref/$genome.frag.end.GC.map $ref/trans.group.count.by.GC 0 >$name.avg_trans_count.by.GC_group
+$bin/get_corr_factor_by_GC.pl $name.avg_trans_count.by.GC_group > $name.lambda_correction.by.GC_group
 
+#--------------------------------------------HD correction----------------------------------------------------------------------------------------#
+$bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.HD.20.group $ref/$genome.frag.end.HD.map $ref/$genome.count.trans.end_pair.by.HD 0 >$name.avg_trans_count.by.HD_group
+$bin/get_corr_factor_by_GC.pl $name.avg_trans_count.by.HD_group > $name.lambda_correction.by.HD_group
 
+#-------------------------------------------visibility-------------------------------------------------------------------------------------------#
+$bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.group.frag_length.range $ref/$genome.end.HH.map $ref/$genome.count.trans.end_pair.by.HH 0 >$name.avg_trans_count.by.HH_group
+$bin/get_corr_factor_by_GC.pl $name.avg_trans_count.by.HH_group > $name.lambda_correction.by.HH_group
+$bin/correct_trans_reads.py $ref/$genome.frag.end.HD.map $ref/$genome.frag.end.GC.map $ref/$genome.end.HH.map $name.lambda_correction.by.HD_group $name.lambda_correction.by.GC_group $name.lambda_correction.by.HH_group $ref/$genome.HD.20.group $ref/$genome.group.frag_GC.range $ref/$genome.group.frag_length.range $name.trans_loop.without.blacklist | $bin/sum_frag_reads_2.py >$name.end.trans_reads.sum
 
+$bin/get_loop_lambda.pl end_loop.$name.within_2Mb.full $ref/$genome.HindIII.frag.ends.bed $ref/$genome.frag.end.GC.map $ref/$genome.group.frag_length.range $ref/group.frag_dist.range loop_statistics.by_group.$name | $bin/get_loop_lambda_GC_correct.pl - $ref/$genome.group.frag_GC.range $ref/$genome.frag.end.GC.map $name.lambda_correction.by.GC_group | $bin/get_loop_lambda_GC_correct.pl - $ref/$genome.HD.20.group $ref/$genome.frag.end.HD.map $name.lambda_correction.by.HD_group | $bin/test_frag_corr.py $name.end.trans_reads.sum $$ref/$genome.frag.end.GC.map - >$name.end_loop.normalized
+
+ln -s $ref/$genome.HindIII.frag.bed
+ln -s $ref/frag.2.all.5kb.anchor
+cp $bin/fragdata_to_anchordata.pl $bin/batch_anchor_by_chrom.pl $bin/get_anchor_pval.r ./
+./batch_anchor_by_chrom.pl $genome.HindIII.frag.bed $name.loop.after_vis frag.2.all.5kb.anchor
+for i in {1..22} X Y;do
+        cat temp.by.chrom/anchor_2_anchor.loop.chr$i.p_val >> anchor_2_anchor.loop.p_val.$name
+done
+rm $genome.HindIII.frag.bed frag.2.all.5kb.anchor fragdata_to_anchordata.pl batch_anchor_by_chrom.pl get_anchor_pval.r

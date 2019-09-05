@@ -22,9 +22,9 @@ $bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.HD.2
 $bin/get_corr_factor_by_GC.pl $name.avg_trans_count.by.HD_group > $name.lambda_correction.by.HD_group
 
 #-------------------------------------------visibility-------------------------------------------------------------------------------------------#
-$bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.group.frag_length.range $ref/$genome.end.HH.map $ref/$genome.count.trans.end_pair.by.HH 0 >$name.avg_trans_count.by.HH_group
+$bin/get_trans_avg_by_GC.pl $name.trans_loop.without.blacklist $ref/$genome.group.frag_length.range $ref/$genome.frag.end.HH.map $ref/$genome.count.trans.end_pair.by.HH 0 >$name.avg_trans_count.by.HH_group
 $bin/get_corr_factor_by_GC.pl $name.avg_trans_count.by.HH_group > $name.lambda_correction.by.HH_group
-$bin/correct_trans_reads.py $ref/$genome.frag.end.HD.map $ref/$genome.frag.end.GC.map $ref/$genome.end.HH.map $name.lambda_correction.by.HD_group $name.lambda_correction.by.GC_group $name.lambda_correction.by.HH_group $ref/$genome.HD.20.group $ref/$genome.group.frag_GC.range $ref/$genome.group.frag_length.range $name.trans_loop.without.blacklist | $bin/sum_frag_reads_2.py >$name.end.trans_reads.sum
+$bin/correct_trans_reads.py $ref/$genome.frag.end.HD.map $ref/$genome.frag.end.GC.map $ref/$genome.frag.end.HH.map $name.lambda_correction.by.HD_group $name.lambda_correction.by.GC_group $name.lambda_correction.by.HH_group $ref/$genome.HD.20.group $ref/$genome.group.frag_GC.range $ref/$genome.group.frag_length.range $name.trans_loop.without.blacklist | $bin/sum_frag_reads_2.py >$name.end.trans_reads.sum
 
 $bin/get_loop_lambda.pl end_loop.$name.within_2Mb.full $ref/$genome.HindIII.frag.ends.bed $ref/$genome.frag.end.GC.map $ref/$genome.group.frag_length.range $ref/group.frag_dist.range loop_statistics.by_group.$name | $bin/get_loop_lambda_GC_correct.pl - $ref/$genome.group.frag_GC.range $ref/$genome.frag.end.GC.map $name.lambda_correction.by.GC_group | $bin/get_loop_lambda_GC_correct.pl - $ref/$genome.HD.20.group $ref/$genome.frag.end.HD.map $name.lambda_correction.by.HD_group | $bin/test_frag_corr.py $name.end.trans_reads.sum $$ref/$genome.frag.end.GC.map - >$name.end_loop.normalized
 $bin/ends_count_to_frag_count.py $name.end_loop.normalized >$name.frag_loop

@@ -187,8 +187,15 @@ fi
 anchorbed=${bin}/references/${genomeID}_DpnII_anchors_avg.bed
 
 cat ${loops}/end_loop.cis |${bin}/src/remove.blacklist_DPNII.py ${bin}/references/${genomeID}_5kb_anchors_blacklist |${bin}/src/get_dist_DPNII.py $anchorbed | awk '{if($4<=2000000) print $0}' > ${norm}/end_loop.2M.rmbl
+cat ${loops}/end_loop.cis |${bin}/src/remove.blacklist_DPNII.py ${bin}/references/${genomeID}_5kb_anchors_blacklist |${bin}/src/get_dist_DPNII.py $anchorbed | awk '{if($4>2000000) print $0}' > ${norm}/end_loop.gt.2M
 
 cat ${loops}/end_loop.trans |${bin}/src/remove.blacklist_DPNII.py ${bin}/references/${genomeID}_5kb_anchors_blacklist > ${norm}/end_loop.rmbl.trans 
+
+wait
+
+# merged trans and reads over 2M
+
+cat ${norm}/end_loop.gt.2M ${norm}/end_loop.rmbl.trans | cut -f1-3 > ${norm}/end_loop.merged.trans
 
 wait
 
@@ -196,13 +203,13 @@ wait
 
 ${bin}/src/merge_sorted_anchor_loop_DPNII.pl ${bin}/references/${genomeID}.full.matrix ${norm}/end_loop.2M.rmbl > ${norm}/end_loop.full &
 
-${bin}/src/get_trans.avg_by_len_DPNII.pl ${norm}/end_loop.rmbl.trans ${bin}/references/${genomeID}_anchor_length.groups $anchorbed ${bin}/references/${genomeID}.trans.possible.pairs > ${norm}/trans.stat &
+${bin}/src/get_trans.avg_by_len_DPNII.pl ${norm}/end_loop.merged.trans ${bin}/references/${genomeID}_anchor_length.groups $anchorbed ${bin}/references/${genomeID}.trans.possible.pairs > ${norm}/trans.stat &
 
 wait
 
 ${bin}/src/get_corr_factor_by_len_DPNII.py ${norm}/trans.stat > ${norm}/len.factor &
 
-${bin}/src/correct.trans.reads.by.corr_DPNII.pl ${norm}/end_loop.rmbl.trans $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${norm}/len.factor > ${norm}/trans.corr.by.all &
+${bin}/src/correct.trans.reads.by.corr_DPNII.pl ${norm}/end_loop.merged.trans $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${norm}/len.factor > ${norm}/trans.corr.by.all &
 
 
 

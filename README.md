@@ -1,8 +1,8 @@
 # HiCorr
-HiCorr is a pipeline designed to normalize and visualize Hi-C/eHi-C data. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
+HiCorr is a pipeline designed to do bias-correction and visualization of Hi-C/eHi-C data. HiCorr focuses on the mapping of chromatin interactions at high-resolution, especially the sub-TAD enhancer-promoter interactions, which requires more rigorous bias-correction, especially the correction of distance biases. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
 
 If you use HiCorr, please site:<br/>
-_Lu,L. et al._ Robust Hi-C chromatin loop maps in human neurogenesis and brain tissues at high-resolution. bioRxiv 744540; doi: https://doi.org/10.1101/744540
+_Lu,L. et al._ Robust Hi-C Maps of Enhancer-Promoter Interactions Reveal the Function of Non-coding Genome in Neural Development and Diseases. Molecular Cell; doi: https://doi.org/10.1016/j.molcel.2020.06.007
 
 For any question about HiCorr, please contact xxl244@case.edu
 

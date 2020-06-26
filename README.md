@@ -29,7 +29,7 @@ To run the Bam-process mode, you need 4 arguments:<br/>
 <br/>
 
 ### HindIII
-HindIII normalizes HindIII Hi-C data. It takes two fragment-pair files as input and outputs an anchor_pair file. <br/>
+HindIII corrects bias of HindIII Hi-C data. It takes two fragment-pair files as input and outputs an anchor_pair file. <br/>
 - The two input files: one file contains intra-chromosome looping fragment pairs(cis pairs), and another contains inter-chromosome looping fragment pairs(trans pairs).
    - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
        <table><tr><td>frag_id_1</td> <td>frag_id_2</td> <td>observed_reads_count</td> <td>distance_between_two_fragments</td></tr>  </table>
@@ -48,7 +48,7 @@ To run the HindIII mode:<br/>
    
 ### DpnII/Mbol(beta version)
 
-DpnII/Mbol normalizes DpnII/Mbol digested Hi-C data. This pipelines is able to process data form the very beginning, eg. .fastq files to the ultimately normalized files. <br/>
+DpnII/Mbol corrects bias of DpnII/Mbol digested Hi-C data. This pipelines is able to process data form the very beginning, eg. .fastq files to the ultimately normalized files. <br/>
 
 The parameters for user to input are listed below. <br/>
 
@@ -82,10 +82,10 @@ To run the DpnII/Mbol mode: <br/>
 
 #### Options
  * _--no-GC-map_ <br/> 
-      If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final normalization result. 
+      If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final bias-correction result. 
 
 ### eHiC
-eHiC mode normalizes eHi-C data. It takes two fragment-end-pair files as input and outputs an anchor_pair file. <br/>
+eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as input and outputs an anchor_pair file. <br/>
 - The two input files: one file contains intra-chromosome looping fragment-end pairs(cis pairs), and another contains inter-chromosome looping fragment-end pairs(trans pairs).
    - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
        <table><tr><td>frag_end_id_1</td> <td>frag_end_id_2</td> <td>observed_reads_count</td> <td>distance_between_two_fragments</td></tr>  </table>
@@ -107,13 +107,13 @@ To run the Heatmap mode: <br/>
    ```./HiCorr Heatmap <chr> <start> <end> <anchor_loop_file> [option]```
 #### Options
 *  _Default_ <br/>
-   By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of normalized reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps, leave the option as blank.
+   By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of bias-corrected reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps, leave the option as blank.
 * _-raw_ <br/>
    Only generates a raw heatmap of observed reads
 * _-expected_ <br/>
    Only generates a heatmap of expected reads
 * _-ratio_ <br/>
-   Only generates a normalized heatmap
+   Only generates a bias-corrected heatmap
 
 Sample Heatmaps
 ![sample heatmaps](http://hiview.case.edu/test/sample/sample_heatmap.PNG)

@@ -48,7 +48,7 @@ To run the HindIII mode:<br/>
    
 ### DpnII/Mbol(beta version)
 
-DpnII/Mbol corrects bias of DpnII/Mbol digested Hi-C data. This pipelines is able to process data form the very beginning, eg. .fastq files to the ultimately normalized files. <br/>
+DpnII/Mbol corrects bias of DpnII/Mbol digested Hi-C data. This pipelines is able to process data form the very beginning, eg. .fastq files to the ultimately bias-corrected files. <br/>
 
 The parameters for user to input are listed below. <br/>
 
@@ -66,7 +66,7 @@ To run the DpnII/Mbol mode: <br/>
 ```BED files```: The link below provide users to download the BED files and then keep them in ```references```.
                  ```http://hiview.case.edu/ssz20/xww/HiCorr/```
 
-```references``` : includes most of the pre-requested files which are required for normalizations. Users are required to link and generate a few files before running the code. <br/>
+```references``` : includes most of the pre-requested files which are required for bias-correction. Users are required to link and generate a few files before running the code. <br/>
 
 - Bowtie Index: these index files should included in a folder which locate within the ```references```. <br/>
    * _hg19_BowtieIndex_ <br/>

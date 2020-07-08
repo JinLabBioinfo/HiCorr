@@ -227,7 +227,7 @@ cat ${norm}/anchors.sum | awk -v avg=$avg '{print $1,$2/avg}' OFS='\t'  > ${norm
 
 wait
 
-${bin}/bin/get_group_statistics_DPNII.pl ${norm}/end_loop.full $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${bin}/ref/${genomeID}.dist.401.group > ${norm}/dist.len.stat 
+${bin}/bin/get_group_statistics_DPNII.pl ${norm}/end_loop.full $anchorbed ${bin}/ref/${genomeID}_anchor_length.groups ${bin}/ref/${genomeID}.dist.401.group > ${norm}/dist.len.stat 
 
 wait
 

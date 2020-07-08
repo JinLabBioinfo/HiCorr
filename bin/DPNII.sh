@@ -95,11 +95,12 @@ wait
 echo Total reads count for merged is `samtools view -c ${process}/merged_R1.sam` >> ${process}/summary.total.read_count &
 
 # Pair two sam file into one bam file
+# Users are required to add your local .fa.fai files into the reference folder.
 
 case $genomeID in
 
-        mm10) refSeq="${bin}/references/mm10.fa.fai";;
-        hg19) refSeq="${bin}/references/hg19.fa.fai";;
+        mm10) refSeq="${bin}/ref/mm10.fa.fai";;
+        hg19) refSeq="${bin}/ref/hg19.fa.fai";;
 
         *)  echo "$usageHelp"
             echo "$genomeHelp"
@@ -107,14 +108,14 @@ case $genomeID in
 esac
 
 
-${bin}/src/pairing_two_SAM_reads_DPNII.pl ${process}/merged_R1.sam ${process}/merged_R2.sam | samtools view -bS -t $refSeq -o - - > ${process}/merged.bam &
+${bin}/bin/pairing_two_SAM_reads_DPNII.pl ${process}/merged_R1.sam ${process}/merged_R2.sam | samtools view -bS -t $refSeq -o - - > ${process}/merged.bam &
 
 wait
 
 echo Uniquely mapped read pairs for merged is `samtools view -c ${process}/merged.bam` >> ${process}/summary.total.read_count &
 
 # remove duplications from the paired bam files
-samtools sort ${process}/merged.bam | samtools view - | ${bin}/src/remove_dup_PE_SAM_sorted_DPNII.pl | samtools view -bS -t $refSeq -o - - > ${process}/merged.sorted.nodup.bam &
+samtools sort ${process}/merged.bam | samtools view - | ${bin}/bin/remove_dup_PE_SAM_sorted_DPNII.pl | samtools view -bS -t $refSeq -o - - > ${process}/merged.sorted.nodup.bam &
 
 wait
 
@@ -122,7 +123,7 @@ echo Total non-duplicated read pairs is `samtools view -c ${process}/merged.sort
 
 echo -ne read_summary_file\\ttotal_inter\\ttotal_intra\\ttotal_samestrand\\tloop_samestrand\\tloop_inward\\tloop_outward\\n >> ${loops}/summary.frag_loop.read_count
 
-samtools view ${process}/merged.sorted.nodup.bam | cut -f2-8 | ${bin}/src/bam_to_temp_HiC_DPNII.pl > ${process}/merged.temp
+samtools view ${process}/merged.sorted.nodup.bam | cut -f2-8 | ${bin}/bin/bam_to_temp_HiC_DPNII.pl > ${process}/merged.temp
 
 wait 
 
@@ -130,8 +131,8 @@ wait
 
 case $genomeID in
 
-        mm10) fragbed="${bin}/references/mm10.DPNII.frag.bed";;
-        hg19) fragbed="${bin}/references/hg19.DPNII.frag.bed";;
+        mm10) fragbed="${bin}/ref/mm10.DPNII.frag.bed";;
+        hg19) fragbed="${bin}/ref/hg19.DPNII.frag.bed";;
 
         *)  echo "$usageHelp"
             echo "$genomeHelp"
@@ -139,18 +140,18 @@ case $genomeID in
 esac
 
 # Map reads to fragment pairs
-${bin}/src/reads_2_cis_frag_loop_DPNII.pl $fragbed $rdlen ${loops}/merged.loop.inward ${loops}/merged.loop.outward ${loops}/merged.loop.samestrand ${loops}/summary.frag_loop.read_count merged ${process}/merged.temp &
+${bin}/bin/reads_2_cis_frag_loop_DPNII.pl $fragbed $rdlen ${loops}/merged.loop.inward ${loops}/merged.loop.outward ${loops}/merged.loop.samestrand ${loops}/summary.frag_loop.read_count merged ${process}/merged.temp &
 
-${bin}/src/reads_2_trans_frag_loop_DPNII.pl $fragbed $rdlen ${loops}/temp.merged.trans.loop ${process}/merged.temp &
+${bin}/bin/reads_2_trans_frag_loop_DPNII.pl $fragbed $rdlen ${loops}/temp.merged.trans.loop ${process}/merged.temp &
 
-${bin}/src/reads_2_trans_frag_loop_DPNII.pl $fragbed $rdlen ${loops}/merged.trans.loop ${process}/merged.temp &
+${bin}/bin/reads_2_trans_frag_loop_DPNII.pl $fragbed $rdlen ${loops}/merged.trans.loop ${process}/merged.temp &
 wait
 
 # Step2 : summary the inward and outward fragments
 
 for file in `ls ${loops}/*.loop.* | grep -v trans`;do       #inward,outward,samestrand
 
-        ${bin}/src/summary_sorted_frag_loop_DPNII.pl $fragbed $file > ${file}.temp
+        ${bin}/bin/summary_sorted_frag_loop_DPNII.pl $fragbed $file > ${file}.temp
 done &
 wait
 
@@ -159,16 +160,16 @@ cat ${loops}/*.inward.temp | awk '{if($4>1000)print $0}' > ${loops}/frag_loop.me
 cat ${loops}/*.outward.temp | awk '{if($4>5000)print $0}' > ${loops}/frag_loop.merged.outward &
 
 
-${bin}/src/summary_sorted_trans_frag_loop_DPNII.pl ${loops}/temp.merged.trans.loop > ${loops}/merged.trans.loop &
+${bin}/bin/summary_sorted_trans_frag_loop_DPNII.pl ${loops}/temp.merged.trans.loop > ${loops}/merged.trans.loop &
 wait
 # Merge all the cis pairs together
-${bin}/src/merge_sorted_frag_loop_DPNII.pl ${loops}/frag_loop.merged.samestrand ${loops}/frag_loop.merged.inward ${loops}/frag_loop.merged.outward >${loops}/frag_loop.merged &
+${bin}/bin/merge_sorted_frag_loop_DPNII.pl ${loops}/frag_loop.merged.samestrand ${loops}/frag_loop.merged.inward ${loops}/frag_loop.merged.outward >${loops}/frag_loop.merged &
 
 # assign the frag pairs to anchor pairs
 wait
-${bin}/src/fragdata_to_anchordata_DPNII.pl ${loops}/frag_loop.merged ${bin}/references/${genomeID}_DpnII_frag_2_anchor > ${loops}/end_loop.cis &
+${bin}/bin/fragdata_to_anchordata_DPNII.pl ${loops}/frag_loop.merged ${bin}/ref/${genomeID}_DpnII_frag_2_anchor > ${loops}/end_loop.cis &
 
-${bin}/src/fragdata_to_anchordata_DPNII.pl ${loops}/merged.trans.loop ${bin}/references/${genomeID}_DpnII_frag_2_anchor > ${loops}/end_loop.trans &
+${bin}/bin/fragdata_to_anchordata_DPNII.pl ${loops}/merged.trans.loop ${bin}/ref/${genomeID}_DpnII_frag_2_anchor > ${loops}/end_loop.trans &
 
 wait
 
@@ -184,12 +185,12 @@ fi
 
 # Extract the cis loops within 2M and remove the blacklist
 
-anchorbed=${bin}/references/${genomeID}_DpnII_anchors_avg.bed
+anchorbed=${bin}/ref/${genomeID}_DpnII_anchors_avg.bed
 
-cat ${loops}/end_loop.cis |${bin}/src/remove.blacklist_DPNII.py ${bin}/references/${genomeID}_5kb_anchors_blacklist |${bin}/src/get_dist_DPNII.py $anchorbed | awk '{if($4<=2000000) print $0}' > ${norm}/end_loop.2M.rmbl
-cat ${loops}/end_loop.cis |${bin}/src/remove.blacklist_DPNII.py ${bin}/references/${genomeID}_5kb_anchors_blacklist |${bin}/src/get_dist_DPNII.py $anchorbed | awk '{if($4>2000000) print $0}' > ${norm}/end_loop.gt.2M
+cat ${loops}/end_loop.cis |${bin}/bin/remove.blacklist_DPNII.py ${bin}/ref/${genomeID}_5kb_anchors_blacklist |${bin}/bin/get_dist_DPNII.py $anchorbed | awk '{if($4<=2000000) print $0}' > ${norm}/end_loop.2M.rmbl
+cat ${loops}/end_loop.cis |${bin}/bin/remove.blacklist_DPNII.py ${bin}/ref/${genomeID}_5kb_anchors_blacklist |${bin}/bin/get_dist_DPNII.py $anchorbed | awk '{if($4>2000000) print $0}' > ${norm}/end_loop.gt.2M
 
-cat ${loops}/end_loop.trans |${bin}/src/remove.blacklist_DPNII.py ${bin}/references/${genomeID}_5kb_anchors_blacklist > ${norm}/end_loop.rmbl.trans 
+cat ${loops}/end_loop.trans |${bin}/bin/remove.blacklist_DPNII.py ${bin}/ref/${genomeID}_5kb_anchors_blacklist > ${norm}/end_loop.rmbl.trans 
 
 wait
 
@@ -201,21 +202,19 @@ wait
 
 # Form the full matrix
 
-${bin}/src/merge_sorted_anchor_loop_DPNII.pl ${bin}/references/${genomeID}.full.matrix ${norm}/end_loop.2M.rmbl > ${norm}/end_loop.full &
+${bin}/bin/merge_sorted_anchor_loop_DPNII.pl ${bin}/ref/${genomeID}.full.matrix ${norm}/end_loop.2M.rmbl > ${norm}/end_loop.full &
 
-${bin}/src/get_trans.avg_by_len_DPNII.pl ${norm}/end_loop.merged.trans ${bin}/references/${genomeID}_anchor_length.groups $anchorbed ${bin}/references/${genomeID}.trans.possible.pairs > ${norm}/trans.stat &
-
-wait
-
-${bin}/src/get_corr_factor_by_len_DPNII.py ${norm}/trans.stat > ${norm}/len.factor &
-
-${bin}/src/correct.trans.reads.by.corr_DPNII.pl ${norm}/end_loop.merged.trans $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${norm}/len.factor > ${norm}/trans.corr.by.all &
-
-
+${bin}/bin/get_trans.avg_by_len_DPNII.pl ${norm}/end_loop.merged.trans ${bin}/ref/${genomeID}_anchor_length.groups $anchorbed ${bin}/ref/${genomeID}.trans.possible.pairs > ${norm}/trans.stat &
 
 wait
 
-${bin}/src/sum_anchor_reads_DPNII.py ${norm}/trans.corr.by.all > ${norm}/anchors.sum &
+${bin}/bin/get_corr_factor_by_len_DPNII.py ${norm}/trans.stat > ${norm}/len.factor &
+
+${bin}/bin/correct.trans.reads.by.corr_DPNII.pl ${norm}/end_loop.merged.trans $anchorbed ${bin}/ref/${genomeID}_anchor_length.groups ${norm}/len.factor > ${norm}/trans.corr.by.all &
+
+wait
+
+${bin}/bin/sum_anchor_reads_DPNII.py ${norm}/trans.corr.by.all > ${norm}/anchors.sum &
 wait
 
 avg=`cat ${norm}/anchors.sum | awk '{s+=$2;n++}END{print s/n}'`
@@ -227,15 +226,15 @@ cat ${norm}/anchors.sum | awk -v avg=$avg '{print $1,$2/avg}' OFS='\t'  > ${norm
 
 wait
 
-${bin}/src/get_group_statistics_DPNII.pl ${norm}/end_loop.full $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${bin}/references/${genomeID}.dist.401.group > ${norm}/dist.len.stat 
+${bin}/bin/get_group_statistics_DPNII.pl ${norm}/end_loop.full $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${bin}/ref/${genomeID}.dist.401.group > ${norm}/dist.len.stat 
 
 wait
 
-${bin}/src/get_loop_lambda_DPNII.pl ${norm}/end_loop.full $anchorbed ${bin}/references/${genomeID}_anchor_length.groups ${bin}/references/${genomeID}.dist.401.group ${norm}/dist.len.stat > ${norm}/end_loop.after.dist.len
+${bin}/bin/get_loop_lambda_DPNII.pl ${norm}/end_loop.full $anchorbed ${bin}/ref/${genomeID}_anchor_length.groups ${bin}/ref/${genomeID}.dist.401.group ${norm}/dist.len.stat > ${norm}/end_loop.after.dist.len
 
 wait
 
-${bin}/src/add.vis.to.cis.2M_DPNII.pl ${norm}/end_loop.after.dist.len ${norm}/anchor.vis.list > ${norm}/end_loop.after.vis
+${bin}/bin/add.vis.to.cis.2M_DPNII.pl ${norm}/end_loop.after.dist.len ${norm}/anchor.vis.list > ${norm}/end_loop.after.vis
 
 wait
 

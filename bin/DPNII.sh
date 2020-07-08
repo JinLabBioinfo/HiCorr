@@ -53,10 +53,11 @@ while getopts "d:g:hs:p:y:z:m:D:b:" opt; do
 done
 
 ## Set reference sequence based on genome ID
+## Users are required to add the bowtie index into the ref folder. 
 case $genomeID in
         
-        mm10) refSeq="${bin}/references/mm10_BowtieIndex/mm10";;
-        hg19) refSeq="${bin}/references/hg19_BowtieIndex/genome";;
+        mm10) refSeq="${bin}/ref/mm10_BowtieIndex/mm10";;
+        hg19) refSeq="${bin}/ref/hg19_BowtieIndex/genome";;
 
         *)  echo "$usageHelp"
             echo "$genomeHelp"

@@ -15,7 +15,7 @@ For any question about HiCorr, please contact xxl244@case.edu
    - Line 3: Replace "PATH_TO_REF" with the path to your directory "ref"
    - Line 4: Replace "PATH_TO_BIN" with the path to your directory "bin" <br/>
 <br/>
-<b>To use HiCorr on DPNII/Mbol data:</b> 
+<b>To use HiCorr on DPNII/Mbol data:</b> <br/>
 See the [DPNII/Mbol - Preparation files](https://github.com/JinLabBioinfo/HiCorr/blob/master/README.md#preparation-files) section for detail.
 
 ## Run HiCorr

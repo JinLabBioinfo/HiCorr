@@ -7,12 +7,14 @@ _Lu,L. et al._ Robust Hi-C Maps of Enhancer-Promoter Interactions Reveal the Fun
 For any question about HiCorr, please contact xxl244@case.edu
 
 ## How to setup
+<b>To use HiCorr on HindIII or eHiC data:</b> 
 1. Download everything into your local machine.
 2. Go to the directory "ref", uncompress all the gz files, then run the script: <br/>
    ./prep_ref.sh <reference_genome>
 3. Go back to the main directory, edit "HiCorr":
    - Line 3: Replace "PATH_TO_REF" with the path to your directory "ref"
    - Line 4: Replace "PATH_TO_BIN" with the path to your directory "bin"
+<b>To use HiCorr on DPNII/Mbol data:</b> See DPNII/Mbol - Preparation files section for detail.
 
 ## Run HiCorr
 Usage:<br/>

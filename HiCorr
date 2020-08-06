@@ -8,7 +8,7 @@ if [ $1 = "HindIII" ];then
 elif [ $1 = "DPNII" ];then
   bash nohup $bin/DPNII.sh -D $1 -m $2 -g $3 -d $4 
 elif [ $1 = "eHiC" ];then
-  bash $bin/eHiC.sh $ref $bin $2 $3 $4
+  bash $bin/eHiC/eHiC.sh $ref/eHiC/ $bin/eHiC/ $2 $3 $4
 elif [ $1 = "Heatmap" ];then
   bash $bin/draw_heatmap.sh $2 $3 $4 $5 $ref $bin $6
 elif [ $1 = "Bam-process" ];then

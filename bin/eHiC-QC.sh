@@ -22,6 +22,6 @@ let x=`samtools view $name.sorted.nodup.bam | wc -l`
 let x=x/2
 echo Non-redundant mapped read pairs for $name is $x>> summary.total.read_count &
 
-samtools view $name.sorted.nodup.bam | cut -f2-13 | $bin/bam_to_temp.pl| awk '{OFS="\t"; print $1,$2,$3,$4,$5,$6,42,42}'> $name.temp
+samtools view $name.sorted.nodup.bam | cut -f2-13 | $bin/bam_to_temp_HiC.pl| awk '{OFS="\t"; print $1,$2,$3,$4,$5,$6,42,42}'> $name.temp
 $bin/reads_to_frag_loop_ELPU.py $ref/eHiC/$genome.HindIII.frag.bed $name.temp $name 0 >>summary.frag_loop.read_count
 rm $name.temp $name.bam $name.mapped.pair $name.loop.nofrag $name.loop.samefrag $name.loop.trans.nofrag

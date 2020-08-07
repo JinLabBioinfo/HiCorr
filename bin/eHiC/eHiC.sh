@@ -43,5 +43,5 @@ cp $bin/fragdata_to_anchordata.pl $bin/batch_anchor_by_chrom.pl $bin/get_anchor_
 for i in {1..22} X Y;do
         cat temp.by.chrom/anchor_2_anchor.loop.chr$i.p_val >> anchor_2_anchor.loop.p_val.$name
 done
-rm $genome.HindIII.frag.bed $genome.frag.2.all.5kb.anchor fragdata_to_anchordata.pl batch_anchor_by_chrom.pl get_anchor_pval.r
+rm end_loop.$name.within_2Mb.full $name.trans_loop.without.blacklist $name.frag_loop *lambda* $genome.HindIII.frag.bed loop_statistics.by_group.$name frag.2.all.5kb.anchor fragdata_to_anchordata.pl batch_anchor_by_chrom.pl get_anchor_pval.r
 

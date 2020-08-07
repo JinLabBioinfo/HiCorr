@@ -24,7 +24,16 @@ Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
 <br/>
-**_HiCorr has 4 different modes: Bam-process, HindIII, DPNII, eHiC and Heatmap_**
+**_HiCorr has 5 different modes: eHiC-QC, Bam-process, HindIII, DPNII, eHiC and Heatmap_**
+
+### eHiC-QC
+eHiC-QC mode takes a pair of fastq.gz files as input, aligns and processes eHiC reads, outputs frag-loop files for further analysis. This mode also outputs summarize numbers which works as quality check fo eHiC experiments.
+Make sure to name your fastq.gz files as name.R1.fastq.gz and name.R1.fastq.gz.
+You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) installed since HiCorr calls Bowtie to do alignments.
+You also need Bowtie index and fa.fai file.
+To run the eHiC-QC mode, you need 4 arguments:
+   ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
+
 
 ### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs. The two output files are the required input files when using the HiCorr HindIII mode. The two output files are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>

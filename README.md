@@ -9,6 +9,7 @@ For any question about HiCorr, please contact xxl244@case.edu
 ## How to setup
 <b>To use HiCorr on HindIII or eHiC data:</b> 
 1. Download everything into your local machine.
+2. Since several reference files are too large to fit github, please download them here: http://hiview.case.edu/test/HiCorr_ref/, and put reference files into corresponding directories.
 2. Go to the directory "ref", uncompress all the gz files, then run the script: <br/>
    ./prep_ref.sh <reference_genome>
 3. Go back to the main directory, edit "HiCorr":

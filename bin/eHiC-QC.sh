@@ -5,6 +5,7 @@ name=$4
 bin=$1
 bowtie_index=$2
 genome=$3
+ref=$5
 
 cat $name.R1.fastq.gz | gunzip | $bin/reformat_fastq.py 6 36 | bowtie -v 3 -m 1 --best --strata --time -p 1 --sam $bowtie_index - $name.R1.sam &
 cat $name.R2.fastq.gz | gunzip | $bin/reformat_fastq.py 6 36 | bowtie -v 3 -m 1 --best --strata --time -p 1 --sam $bowtie_index - $name.R2.sam &

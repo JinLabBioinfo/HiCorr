@@ -29,8 +29,8 @@ Usage:<br/>
 ### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs. The two output files are the required input files when using the HiCorr HindIII mode. The two output files are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>
 This mode currently is only able to process bam file of HindIII Hi-C data. <br/>
-To run the Bam-process mode, you need 4 arguments:<br/>
-   ```./HiCorr Bam-process <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> ```
+To run the Bam-process mode, you need 5 arguments:<br/>
+   ```./HiCorr Bam-process <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> <genome>```
 <br/>
 
 ### HindIII

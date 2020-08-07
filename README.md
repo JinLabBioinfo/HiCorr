@@ -31,7 +31,7 @@ eHiC-QC mode takes a pair of fastq.gz files as input, aligns and processes eHiC 
 Make sure to name your fastq.gz files as name.R1.fastq.gz and name.R1.fastq.gz.
 You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) installed since HiCorr calls Bowtie to do alignments.
 You also need Bowtie index and fa.fai file.
-To run the eHiC-QC mode, you need 4 arguments:
+To run the eHiC-QC mode, you need 4 arguments: <br/>
    ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
 
 

@@ -26,3 +26,24 @@ echo Non-redundant mapped read pairs for $name is $x>> summary.total.read_count 
 samtools view $name.sorted.nodup.bam | cut -f2-13 | $bin/bam_to_temp_HiC.pl| awk '{OFS="\t"; print $1,$2,$3,$4,$5,$6,42,42}'> $name.temp
 $bin/reads_to_frag_loop_ELPU.py $ref/eHiC/$genome.HindIII.frag.bed $name.temp $name 0 >>summary.frag_loop.read_count
 rm $name.temp $name.bam $name.mapped.pair $name.loop.nofrag $name.loop.samefrag $name.loop.trans.nofrag
+
+for file in `ls $name*.loop.* | grep -v trans`;do
+        awk '{OFS="\t";print $4$3,$8$7}' $file | $bin/reform_end_id.py | $bin/summary_sorted_frag_loop.pl $ref/$genome.end.transfored-id.bed > temp.$file
+        $bin/resort_by_frag_id.pl $ref/hg19.end.transfored-id.bed temp.$file
+done &
+
+for file in `ls $name*.loop.trans`;do
+        awk '{OFS="\t";print $4$3,$8$7}' $file | $bin/reform_end_id.py | $bin/summary_sorted_trans_frag_loop.pl >temp.$file
+        $bin/resort_by_frag_id.pl $ref/hg19.end.transfored-id.bed temp.$file
+done &
+
+wait
+$bin/merge_sorted_frag_loop.pl `ls temp*.samestrand` > frag_loop.$name.samestrand &
+$bin/merge_sorted_frag_loop.pl `ls temp*.inward` | awk '{if($4>2000)print $0}' > frag_loop.$name.inward &
+$bin/merge_sorted_frag_loop.pl `ls temp*.outward` | awk '{if($4>100000)print $0}' > frag_loop.$name.outward &
+wait
+rm temp*
+$bin/merge_sorted_frag_loop.pl `ls temp*.trans` | $bin/end_id_to_original.py >end_loop.$name.trans
+$bin/merge_sorted_frag_loop.pl frag_loop.$name.samestrand frag_loop.$name.inward frag_loop.$name.outward | $bin/end_id_to_original.py >end_loop.$name.cis
+rm *inward *outward *samestrand
+

@@ -29,12 +29,12 @@ rm $name.temp $name.bam $name.mapped.pair $name.loop.nofrag $name.loop.samefrag 
 
 for file in `ls $name*.loop.* | grep -v trans`;do
         awk '{OFS="\t";print $4$3,$8$7}' $file | $bin/reform_end_id.py | $bin/summary_sorted_frag_loop.pl $ref/$genome.end.transfored-id.bed > temp.$file
-        $bin/resort_by_frag_id.pl $ref/hg19.end.transfored-id.bed temp.$file
+        $bin/resort_by_frag_id.pl $ref/$genome.end.transfored-id.bed temp.$file
 done &
 
 for file in `ls $name*.loop.trans`;do
         awk '{OFS="\t";print $4$3,$8$7}' $file | $bin/reform_end_id.py | $bin/summary_sorted_trans_frag_loop.pl >temp.$file
-        $bin/resort_by_frag_id.pl $ref/hg19.end.transfored-id.bed temp.$file
+        $bin/resort_by_frag_id.pl $ref/$genome.end.transfored-id.bed temp.$file
 done &
 
 wait

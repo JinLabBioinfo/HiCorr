@@ -33,7 +33,7 @@ You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) and samto
 You also need Bowtie index and fa.fai file.
 To run the eHiC-QC mode, you need 4 arguments: <br/>
    ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
-You will need several reference files, please download them from http://hiview.case.edu/test/HiCorr_ref/eHiC-QC/, uncompress them and put them in your ref folder.
+<br/>You need several reference files, please download them from http://hiview.case.edu/test/HiCorr_ref/eHiC-QC/, uncompress them and put them in your ref folder.
 
 
 ### Bam-process

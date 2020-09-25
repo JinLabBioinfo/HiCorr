@@ -27,12 +27,13 @@ Usage:<br/>
 **_HiCorr has 5 different modes: eHiC-QC, Bam-process, HindIII, DPNII, eHiC and Heatmap_**
 
 ### eHiC-QC
-eHiC-QC mode takes a pair of fastq.gz files as input, aligns and processes eHiC reads, outputs frag-loop files for further analysis. This mode also outputs summarize numbers which works as quality check fo eHiC experiments.
-Make sure to name your fastq.gz files as name.R1.fastq.gz and name.R1.fastq.gz.
-You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) installed since HiCorr calls Bowtie to do alignments.
+eHiC-QC mode takes a pair of fastq.gz files as input, aligns and processes eHiC reads, outputs fragment-end-pair files for further analysis. This mode also outputs summarize numbers which works as quality check fo eHiC experiments.
+Make sure to name your fastq.gz files as <name>.R1.fastq.gz and <name>.R1.fastq.gz.
+You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) and samtools(http://www.htslib.org/) installed since HiCorr calls Bowtie to do alignments.
 You also need Bowtie index and fa.fai file.
 To run the eHiC-QC mode, you need 4 arguments: <br/>
    ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
+You will need several reference files, please download them from http://hiview.case.edu/test/HiCorr_ref/eHiC-QC/, uncompress them and put them in your ref folder.
 
 
 ### Bam-process
@@ -99,7 +100,7 @@ To run the DpnII/Mbol mode: <br/>
       If _--no-GC-map_ is specified, HiCorr will not correct mappability and GC content. Note that based on our experience, GC content and mappability have limited effect on final bias-correction result. 
 
 ### eHiC
-eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as input and outputs an anchor_pair file. <br/>
+eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as input (use HiCorr's eHiC-QC mode if you need to generate these files) and outputs an anchor_pair file. <br/>
 - The two input files: one file contains intra-chromosome looping fragment-end pairs(cis pairs), and another contains inter-chromosome looping fragment-end pairs(trans pairs).
    - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
        <table><tr><td>frag_end_id_1</td> <td>frag_end_id_2</td> <td>observed_reads_count</td> <td>distance_between_two_fragments</td></tr>  </table>

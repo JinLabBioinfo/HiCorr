@@ -14,7 +14,7 @@ elif [ $1 = "Heatmap" ];then
 elif [ $1 = "Bam-process" ];then
   bash $bin/bam_to_frag_loop.sh $2 $3 $4 $ref $bin $5
 elif [ $1 = "eHiC-QC" ];then
-  bash $bin/eHiC-QC.sh $bin $1 $2 $3 $ref
+  bash $bin/eHiC-QC.sh $bin/eHiC-QC/ $1 $2 $3 $ref/eHiC-QC/
 else
   echo "Wrong mode entered. Please refer to manual and re-enter"
 fi

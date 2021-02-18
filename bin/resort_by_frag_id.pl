@@ -5,7 +5,7 @@ my $usage =     "Usage:./resort_by_frag_id.pl <frag_bed> <loop_file_sorted_withi
                 "\tThis program takes loop file, each chrome should already be sorted, but frag_id not sorted because of unclear order between chrome\n".
 		"\tTherefore this program first split loop file by chrom and then merge them again by fragment id.\n";
 
-my ($frag_bed, $loop_file) = @ARGV;
+my ($frag_bed, $loop_file, $bin) = @ARGV;
 
 if(not defined $loop_file){
 	$loop_file = "-";
@@ -53,7 +53,8 @@ close(IN);
 close($curr_fh);
 my $file_list = join(" ", @temp_files);
 
-`BIN/merge_sorted_frag_loop.pl $file_list > temp.$loop_file`;
+my $path=$bin."merge_sorted_frag_loop.pl";
+`$path $file_list > temp.$loop_file`;
 `mv temp.$loop_file $loop_file`;
 `rm -r $folder`;
 

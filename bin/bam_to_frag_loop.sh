@@ -23,10 +23,10 @@ mv temp.$name.loop.outward $name.loop.outward
 mv temp.$name.loop.samestrand $name.loop.samestrand
 mv temp.$name.loop.trans $name.trans.frag_loop
 
-$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.inward  &
-$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.outward  &
-$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.samestrand  &
-$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.trans  &
+$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.inward $bin &
+$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.outward $bin &
+$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.samestrand $bin &
+$bin/resort_by_frag_id.pl $ref/HindIII/$genome.HindIII.frag.bed $name.loop.trans $bin &
 wait
 
 awk '{if($4>1000)print $0}' $name.loop.inward >temp.$name.loop.inward &

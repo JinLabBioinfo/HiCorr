@@ -12,7 +12,7 @@ $bin/merge_sorted_frag_loop.pl $name.loop.between.frag.within_2Mb $ref/$genome.f
 cat $trans_loop | $bin/remove_outlier.py $ref/$genome.blacklist.frag >frag_loop.$name.trans.without_blacklist
 $bin/get_group_statistics.pl $name.loop.between.frag.within_2Mb.full $ref/$genome.HindIII.frag.bed $ref/$genome.group.frag_length.range $ref/group.frag_dist.range $ref/$genome.HindIII_frag.stat >group.statistics
 $bin/get_cis_avg_by_GC.pl frag_loop.$name.trans.without_blacklist $ref/group.frag_GC.range $ref/$genome.HindIII_frag.stat $ref/$genome.count.trans.frag_loop.by.GC_group.list 0.2 >avg_count.by.trans.GC
-$bin/get_cis_avg_by_GC.pl frag_loop.$name.trans.without_blacklist $ref/$genome.group.frag_length.range $ref/$genome.frag.length.map $ref/$genome.count.trans_pair.by_length.group 0.2 >avg_count.by.length
+$bin/get_cis_avg_by_GC.pl frag_loop.$name.trans.without_blacklist $ref/$genome.group.frag_length.range $ref/$genome.frag.length.map $ref/$genome.count.trans.frag_loop.by_length.group 0.2 >avg_count.by.length
 
 $bin/get_corr_factor_by_GC.pl avg_count.by.length >lambda.by.length
 $bin/get_corr_factor_by_GC.pl avg_count.by.trans.GC >lambda.by.trans.GC

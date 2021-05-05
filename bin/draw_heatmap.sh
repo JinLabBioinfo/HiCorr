@@ -10,7 +10,7 @@ ref=$6
 option=$7
 
 $bin/select_anchor.sh $chr $start $end $ref
-$bin/select_loop.py anchors_$region.bed $anchor_loop >anchor_loop.$region
+$bin/select_loop.py $genome.anchors_$region.bed $anchor_loop >anchor_loop.$region
 
 $bin/generate_data_matrix.pl anchors_$region.bed  anchor_loop.$region grid.$region
 

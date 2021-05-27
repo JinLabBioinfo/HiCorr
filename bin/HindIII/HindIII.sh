@@ -23,7 +23,7 @@ $bin/get_loop_lambda.pl $name.loop.between.frag.within_2Mb.full $ref/$genome.Hin
 ln -s $ref/$genome.HindIII.frag.bed
 ln -s $ref/$genome.frag.2.all.5kb.anchor
 cp $bin/fragdata_to_anchordata.pl $bin/batch_anchor_by_chrom.pl $bin/get_anchor_pval.r ./
-./batch_anchor_by_chrom.pl $genome.HindIII.frag.bed $name.frag_loop $genome.frag.2.all.5kb.anchor
+./batch_anchor_by_chrom.pl $genome.HindIII.frag.bed $name.frag_loop.normalized $genome.frag.2.all.5kb.anchor
 for i in {1..22} X Y;do
         cat temp.by.chrom/anchor_2_anchor.loop.chr$i.p_val >> anchor_2_anchor.loop.p_val.$name
 done

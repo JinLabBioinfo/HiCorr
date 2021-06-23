@@ -28,7 +28,7 @@ my $loop_bed;
 open(IN, $loop_list) || die("Error: Cannot open file $loop_list!\n");
 while(my $line = <IN>){
         chomp $line;
-        my ($fid1, $fid2) = split "\t", $line;
+        my ($fid1, $fid2,$val,$dist) = split "\t", $line;
 	my $gid1 = $map_frag->{$fid1};
 	my $gid2 = $map_frag->{$fid2};
 	if($gid1 ne $gid2){
@@ -37,7 +37,7 @@ while(my $line = <IN>){
 			#$random_bed->{$gid1}->{$gid2} = $rand;
 		}
 		
-		$loop_bed->{$gid1}->{$gid2} += 1;
+		$loop_bed->{$gid1}->{$gid2} += $val;
 			
 	}
 }

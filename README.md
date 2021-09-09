@@ -9,7 +9,7 @@ For any question about HiCorr, please contact xxl244@case.edu
 ## How to setup
 ### Download code and reference files
 ```
-git clone https://github.com/shanshan950/HiCorr.git
+git clone https://github.com/JinLabBioinfo/HiCorr.git
 cd cd HiCorr/
 wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files
 tar -xvf HiCorr.tar.gz 

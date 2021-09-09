@@ -1,0 +1,22 @@
+#!/bin/bash
+
+ref=/lab/solexa_weissman/cweng/PlayRoom/Shanshan/test_HiCorr/test_V2/HiCorr/ref
+bin=/lab/solexa_weissman/cweng/PlayRoom/Shanshan/test_HiCorr/test_V2/HiCorr/bin
+
+if [ $1 = "HindIII" ];then
+  bash $bin/HindIII/HindIII.sh $ref/HindIII/ $bin/HindIII/ $2 $3 $4 $5  # <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome>
+elif [ $1 = "DPNII" ];then
+  bash $bin/DPNII/DPNII.sh $ref/DPNII/ $bin/DPNII/ $2 $3 $4 $5 # <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome>
+elif [ $1 = "eHiC" ];then
+  bash $bin/eHiC/eHiC.sh $ref/eHiC/ $bin/eHiC/ $2 $3 $4
+elif [ $1 = "Heatmap" ];then
+  bash $bin/draw_heatmap.sh $2 $3 $4 $5 $ref $bin $6 $7 $8 # <chr> <start> <end> <anchor_loop_file> $ref $bin <reference_genome> <enzyme>
+elif [ $1 = "Bam-process-HindIII" ];then
+  bash $bin/preprocess/bam_to_frag_loop.sh $2 $3 $4 $ref $bin/preprocess/ $5 HindIII
+elif [ $1 = "Bam-process-DpNII" ];then
+  bash $bin/preprocess/bam_to_frag_loop.sh $2 $3 $4 $ref $bin/preprocess/ $5 DPNII
+elif [ $1 = "eHiC-QC" ];then
+  bash $bin/eHiC-QC.sh $bin/eHiC-QC/ $1 $2 $3 $ref/eHiC-QC/
+else
+  echo "Wrong mode entered. Please refer to manual and re-enter"
+fi

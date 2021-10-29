@@ -39,6 +39,9 @@ Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
 <br/>
+
+Some example logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess/tree/master/documents)
+
 **_HiCorr has 5 different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**
 
 

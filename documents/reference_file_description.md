@@ -17,51 +17,51 @@ Each directory mainly includes the follwing files, for example, in "DPNII"
 ```
 ls ref/DPNII/
 ```
-hg19.DPNII.frag.bed: fragment bed file for DpNII enzyme cutting site.
+**_hg19.DPNII.frag.bed_**: fragment bed file for DpNII enzyme cutting site.
 <table><tr><td>chr</td><td>beg</td> <td>end</td> <td>fragment id</td> <td>fragment size</td></tr></table>
 
 ![sample heatmaps](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.DPNII.frag.bed.PNG) </br>
 
-hg19.DPNII.blacklist includes the fragment overlapping the blacklist regions.
+**_hg19.DPNII.blacklist_** includes the fragment overlapping the blacklist regions.
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.DPNII.blacklist.PNG) </br>
 
-To run HiCorr with 5kb resolution, we need combine the neighbor fragments to achieve 5kb anchor size by using the hg19_DPNII_frag_2_anchor files
+To run HiCorr with 5kb resolution, we need combine the neighbor fragments to achieve 5kb anchor size by using the **_hg19_DPNII_frag_2_anchor_** files
 <table><tr><td>fragment</td><td>5kb_anchor</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19_DPNII_frag_2_anchor.PNG) </br>
 
 After converting fragment to 5kb anchor, you will get anchor based files: </br>
-hg19_DPNII_anchors_avg.bed:
+**_hg19_DPNII_anchors_avg.bed_**:
 <table><tr><td>chr</td><td>beg</td> <td>end</td> <td>anchor id</td> <td>anchor size</td><td>averaged fragment size</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19_DPNII_anchors_avg.bed.PNG) </br>
 
-hg19_5kb_anchors_blacklist:
+**_hg19_5kb_anchors_blacklist_**:
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19_5kb_anchors_blacklist.PNG) </br>
 
-hg19.dist.401.group contains the 400 distance groups for 0-2Mb  
+**_hg19.dist.401.group_** contains the 400 distance groups for 0-2Mb  
 <table><tr><td>dist group id</td><td>group_start</td><td>group_end</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.dist.401.group.PNG)</br>
 
-hg19_anchor_length.groups contains anchor length group
+**_hg19_anchor_length.groups_** contains anchor length group
 <table><tr><td>length group id</td><td>group_start</td><td>group_end</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19_anchor_length.groups.PNG)</br>
 
-hg19.full.matrix contains all possible anchor pairs within 2Mb.
+**_hg19.full.matrix_** contains all possible anchor pairs within 2Mb.
 <table><tr><td>anchor id 1</td><td>anchor id 2</td><td>zero</td><td>anchor loop size</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.full.matrix.PNG)</br>
 
-hg19.full.dist.len.stat
+**_hg19.full.dist.len.stat_**
 <table><tr><td>anchor1 length group id</td><td>anchor2 length group id</td><td>dist group id</td><td>number of anchor pairs within 2Mb</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.full.dist.len.stat.PNG)</br>
 
-hg19.trans.possible.pairs contains number possible pairs counts from trans-interactions
+**_hg19.trans.possible.pairs_** contains number possible pairs counts from trans-interactions
 <table><tr><td>anchor1 length group id</td><td>anchor2 length group id</td><td>number of anchor pairs within 2Mb</td></tr></table>
 
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.trans.possible.pairs.PNG)</br>

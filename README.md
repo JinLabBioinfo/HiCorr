@@ -13,13 +13,13 @@ git clone https://github.com/shanshan950/HiCorr.git
 cd HiCorr/
 chmod 755 HiCorr
 chmod -R 755 bin/*
-
 ```
-### Download code and reference files
+### Download reference files
 After you run the following commands, you will see "ref/" in the current directory. There are 4 subdirectories under "ref/": "DPNII/  eHiC/  eHiC-QC/  HindIII".
-In each subdirectory, there are reference files for genome build hg19 and mm10. More descriptions for the reference files can be found here.
+In each subdirectory, there are reference files for genome build hg19 and mm10. More descriptions for the reference files can be found [here](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/reference_file_description.md).
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files # It needs ~103G space after decompress
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files 
+# It needs ~103G space after decompress
 tar -xvf HiCorr.tar.gz 
 ls
 ls ref/
@@ -39,15 +39,8 @@ Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
 <br/>
-**_HiCorr has 5 different modes: eHiC-QC, Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC and Heatmap_**
+**_HiCorr has 5 different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**
 
-### eHiC-QC
-eHiC-QC mode takes a pair of fastq.gz files as input, aligns and processes eHiC reads, outputs fragment-end-pair files for further analysis. This mode also outputs summarize numbers which works as quality check fo eHiC experiments.
-Make sure to name your fastq.gz files as <name>.R1.fastq.gz and <name>.R1.fastq.gz.
-You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) and samtools(http://www.htslib.org/) installed since HiCorr calls Bowtie to do alignments.
-You also need Bowtie index and fa.fai file.
-To run the eHiC-QC mode, you need 4 arguments: <br/>
-   ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
 
 ### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs. The two output files are the required input files when using the HiCorr HindIII mode. The two output files are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>
@@ -81,6 +74,14 @@ To run the HindIII mode:<br/>
 - The format of the two input files are the same as HindIII
 To run the DpNII/Mbol mode:<br/>
    ```./HiCorr DPNII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
+
+### eHiC-QC
+eHiC-QC mode takes a pair of fastq.gz files as input, aligns and processes eHiC reads, outputs fragment-end-pair files for further analysis. This mode also outputs summarize numbers which works as quality check fo eHiC experiments.
+Make sure to name your fastq.gz files as <name>.R1.fastq.gz and <name>.R1.fastq.gz.
+You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) and samtools(http://www.htslib.org/) installed since HiCorr calls Bowtie to do alignments.
+You also need Bowtie index and fa.fai file.
+To run the eHiC-QC mode, you need 4 arguments: <br/>
+   ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
  
 ### eHiC
 eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as input (use HiCorr's eHiC-QC mode if you need to generate these files) and outputs an anchor_pair file. <br/>

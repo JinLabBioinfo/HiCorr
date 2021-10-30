@@ -40,9 +40,18 @@ sed -i "s|PATH_TO_BIN|${new_bin}|" HiCorr
 Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
-<br/>
 
-Some example logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess)
+### HiCorr test data
+This test dataset is H9 H-C fragment loop(restriction enzyme: HindIII) from GSE130711.  <br/>
+The preprocessing is done with genome build hg19. <br/>
+```
+wget wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.cis.gz # cis frag_loop
+wget wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.trans.gz # trans frag_loop
+gunzip frag_loop.H9.cis.gz
+gunzip frag_loop.H9.trans.gz
+./HiCorr HindIII frag_loop.H9.cis frag_loop.H9.trans H9 hg19
+```
+Some example including preprocessing steps logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess)
 
 **_HiCorr has 5 different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**
 

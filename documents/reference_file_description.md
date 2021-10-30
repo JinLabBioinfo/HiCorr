@@ -67,5 +67,5 @@ After converting fragment to 5kb anchor, you will get anchor based files: </br>
 ![](https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.trans.possible.pairs.PNG)</br>
 
 
-## Generate HiCorr reference files for given restriction enzyme cutting site and genome build
+
 

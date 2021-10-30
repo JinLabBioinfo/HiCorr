@@ -3,7 +3,7 @@ Download chr.fa and chrom.size in UCSC FTP sites, e.g. hg19:
 
 **_chr.fa files_**: https://hgdownload.cse.ucsc.edu/goldenPath/hg19/chromosomes/ </br>
 **_chrom.size_**: https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes </br>
-**_blacklist region _**: https://github.com/Boyle-Lab/Blacklist </br>
+**_blacklist region_**: https://github.com/Boyle-Lab/Blacklist </br>
 All the scripts are in https://github.com/JinLabBioinfo/HiCorr/tree/master/documents/lib
 
 Define the following variable before run the next trunk
@@ -17,6 +17,7 @@ blacklist.frag=
 chr.fa.dir=
 chromsize=
 ```
+## Note: We suggest users run the following commands in the "HiCorr/documents/lib/" directory
 
 
 ```

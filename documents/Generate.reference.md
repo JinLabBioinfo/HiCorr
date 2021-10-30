@@ -4,7 +4,7 @@ Download chr.fa and chrom.size in UCSC FTP sites, e.g. hg19:
 chr.fa files: https://hgdownload.cse.ucsc.edu/goldenPath/hg19/chromosomes/ </br>
 chrom.size: https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes </br>
 blacklist: https://github.com/Boyle-Lab/Blacklist </br>
-All the scripts are in 
+All the scripts are in https://github.com/JinLabBioinfo/HiCorr/tree/master/documents/lib
 ```
 genome=hg19
 Enzyme=DPNII
@@ -14,10 +14,10 @@ seq=GATC
 get $blacklist by overlapping ${genome}.${Enzyme}.frag.bed and blacklist file
 
 ```
-lib=./scripts/
+lib=./lib/
 
 #step1 : generate the cutting sites bed files
-$lib/find_RE_sites.pl $genome $seq > $genome.$seq.cutting.sites 
+$lib/find_RE_sites.pl <chr.fa_directory> <chrom.size> $seq > $genome.$seq.cutting.sites 
 
 #step2: transfer the cutting sites to the fragment bed
 $lib/sites_to_frag.py $genome.size $genome.$seq.cutting.sites | awk '{print $0,$3-$2+1}' OFS='\t' >  $genome.$seq.frag.bed

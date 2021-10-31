@@ -49,7 +49,7 @@ wget wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop
 wget wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.trans.gz # trans frag_loop
 gunzip frag_loop.H9.cis.gz
 gunzip frag_loop.H9.trans.gz
-./HiCorr HindIII frag_loop.H9.cis frag_loop.H9.trans H9 hg19
+./HiCorr HindIII frag_loop.H9.cis frag_loop.H9.trans H9 hg19 # It take a few hours to run
 ```
 Some example including preprocessing steps logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess)
 

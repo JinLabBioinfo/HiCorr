@@ -56,7 +56,6 @@ Some example including preprocessing steps logs are be found [here](https://gith
 
 **_HiCorr has 5 different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**
 
-
 ### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs. The two output files are the required input files when using the HiCorr HindIII mode. The two output files are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>
 This mode currently is only able to process bam file of HindIII Hi-C data. <br/>
@@ -66,6 +65,7 @@ To run the Bam-process mode, you need 6 arguments:
    
    ```./HiCorr Bam-process-DPNII <bam_file> <name_of_your_data> <mapped_read_length_in_your_bam_file> <genome> DPNII```
 
+More details about the preprocessing (fastq to bam files to fragment loops) are [here](https://github.com/shanshan950/Hi-C-data-preprocess)
 
 ### HindIII
 HindIII corrects bias of HindIII Hi-C data. It takes two fragment-pair files as input and outputs an anchor_pair file. <br/>
@@ -97,7 +97,7 @@ You need to have Bowtie(http://bowtie-bio.sourceforge.net/index.shtml) and samto
 You also need Bowtie index and fa.fai file.
 To run the eHiC-QC mode, you need 4 arguments: <br/>
    ```./HiCorr eHiC-QC <bowtie_index> <fa.fai> <name>```
- 
+
 ### eHiC
 eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as input (use HiCorr's eHiC-QC mode if you need to generate these files) and outputs an anchor_pair file. <br/>
 - The two input files: one file contains intra-chromosome looping fragment-end pairs(cis pairs), and another contains inter-chromosome looping fragment-end pairs(trans pairs).
@@ -113,7 +113,7 @@ eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as i
    See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample <br/>
 To run the eHiC mode:<br/>
    ```./HiCorr eHiC <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome>```
-   
+ 
 ### Heatmap
 Heatmap mode generates Hi-C heatmaps of a certain region you choosed(up to 2,000,000bp). This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
 <br/>
@@ -131,3 +131,6 @@ To run the Heatmap mode: <br/>
 
 Sample Heatmaps
 ![sample heatmaps](http://hiview.case.edu/test/sample/sample_heatmap.PNG)
+### Next step analysis
+   We developed DeepLoop to remove noise and enhance signals from low-depth Hi-C data, See more details in https://github.com/JinLabBioinfo/DeepLoop
+

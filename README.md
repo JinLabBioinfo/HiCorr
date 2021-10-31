@@ -51,6 +51,7 @@ gunzip frag_loop.H9.cis.gz
 gunzip frag_loop.H9.trans.gz
 ./HiCorr HindIII frag_loop.H9.cis frag_loop.H9.trans H9 hg19 # It take a few hours to run
 ```
+
 Some example including preprocessing steps logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess)
 
 **_HiCorr has 5 different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**

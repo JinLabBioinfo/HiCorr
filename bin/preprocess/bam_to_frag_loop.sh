@@ -42,8 +42,8 @@ then
 fi
 wait
 
-mv temp.$name.loop.inward $name.loop.inward
-mv temp.$name.loop.outward $name.loop.outward
+mv -f temp.$name.loop.inward $name.loop.inward
+mv -f temp.$name.loop.outward $name.loop.outward
 
 perl $bin/merge_sorted_frag_loop.pl $name.loop.inward $name.loop.outward $name.loop.samestrand >$name.cis.frag_loop
-rm $name.loop.inward $name.loop.outward $name.loop.samestrand
+#rm $name.loop.inward $name.loop.outward $name.loop.samestrand

@@ -41,31 +41,7 @@ Usage:<br/>
    ```./HiCorr <mode> <parameters>```
 <br/>
 
-### HiCorr test data (fragment loop)
-This test dataset is H9 H-C fragment loop(restriction enzyme: HindIII; genome build:hg19) from GSE130711.  <br/>
-```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.cis.gz # cis frag_loop
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.trans.gz # trans frag_loop
-gunzip frag_loop.H9.cis.gz
-gunzip frag_loop.H9.trans.gz
-./HiCorr HindIII frag_loop.H9.cis frag_loop.H9.trans H9 hg19 # It take a few hours to run
-```
-
-Some example including preprocessing steps logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess)
-
-### HiCorr test data (bam)
-This test dataset is subsampled bam file for H9 rep1 Hi-C.(restriction enzyme: HindIII; genome build:hg19) from GSE130711.
-```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/H9_rep1.subsample.sorted.bam
-./HiCorr Bam-process-HindIII H9_rep1.subsample.sorted.bam H9_rep1.subsample 36 hg19 HindIII
-```
-You will found "H9_rep1.subsample.cis.frag_loop" and "H9_rep1.subsample.trans.frag_loop", the other files are intermediate files. <br/>
-Next run HiCorr bias correction using two *frag_loop files. <br/>
-```
-./HiCorr HindIII H9_rep1.subsample.cis.frag_loop H9_rep1.subsample.trans.frag_loop H9 hg19 # It take a few hours to run
-```
-
-**_HiCorr has 5 different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**
+**_HiCorr has different modes: Bam-process-HindIII, Bam-process-DPNII, HindIII, DPNII, eHiC-QC, eHiC and Heatmap_**
 
 ### Bam-process
 Bam-process mode takes a sorted bam file as input, processes and generates two files as outputs. The two output files are the required input files when using the HiCorr HindIII mode. The two output files are intra-chromosome looping fragment-pair file and inter-chromosome looping fragment-pair file. <br/>
@@ -124,12 +100,64 @@ eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as i
    See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample <br/>
 To run the eHiC mode:<br/>
    ```./HiCorr eHiC <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome>```
- 
+
+   ### HiCorr test data (fragment loop, HindIII)
+This test dataset is H9 H-C fragment loop(restriction enzyme: HindIII; genome build:hg19) from GSE130711.  <br/>
+```
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.cis.gz # cis frag_loop
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.H9.trans.gz # trans frag_loop
+gunzip frag_loop.H9.cis.gz
+gunzip frag_loop.H9.trans.gz
+./HiCorr HindIII frag_loop.H9.cis frag_loop.H9.trans H9 hg19 # It take a few hours to run
+```
+
+Some example including preprocessing steps logs are be found [here](https://github.com/shanshan950/Hi-C-data-preprocess)
+
+### HiCorr test data (bam, HindIII)
+This test dataset is subsampled bam file for H9 rep1 Hi-C.(restriction enzyme: HindIII; genome build:hg19) from GSE130711.
+```
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/H9_rep1.subsample.sorted.bam
+./HiCorr Bam-process-HindIII H9_rep1.subsample.sorted.bam H9_rep1.subsample 36 hg19 HindIII
+```
+You will found "H9_rep1.subsample.cis.frag_loop" and "H9_rep1.subsample.trans.frag_loop", the other files are intermediate files. <br/>
+Next run HiCorr bias correction using two *frag_loop files. <br/>
+```
+./HiCorr HindIII H9_rep1.subsample.cis.frag_loop H9_rep1.subsample.trans.frag_loop H9_rep1.subsample hg19 # It take a few hours to run
+```
+
+### HiCorr test data (bam, DPNII)
+This test dataset is subsampled bam file for H1 Bio1Tech1Ind2 in-situ Hi-C.(restriction enzyme: DPNII; genome build:hg19) from 4DNES2M5JIGV.
+```
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/4DNES2M5JIGV.Bio1Tech1Ind2.subsample.sorted.bam
+./HiCorr Bam-process-DpNII 4DNES2M5JIGV.Bio1Tech1Ind2.subsample.sorted.bam  4DNES2M5JIGV.Bio1Tech1Ind2.subsample 50 hg19 DPNII
+```
+You will found "4DNES2M5JIGV.Bio1Tech1Ind2.subsample.cis.frag_loop" and "4DNES2M5JIGV.Bio1Tech1Ind2.subsample.trans.frag_loop", the other files are intermediate files. <br/>
+Next run HiCorr bias correction using two *frag_loop files. <br/>
+```
+./HiCorr DPNII 4DNES2M5JIGV.Bio1Tech1Ind2.subsample.cis.frag_loop 4DNES2M5JIGV.Bio1Tech1Ind2.subsample.trans.frag_loop 4DNES2M5JIGV.Bio1Tech1Ind2.subsample hg19 # It take a few hours to run
+```
 ### Heatmap
 Heatmap mode generates Hi-C heatmaps of a certain region you choosed(up to 2,000,000bp). This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
 <br/>
 To run the Heatmap mode: <br/>
-   ```./HiCorr Heatmap <chr> <start> <end> <anchor_loop_file> <reference_genome> <enzyme> [option]```
+   ```./HiCorr Heatmap <chr> <start> <end> <anchor_loop_file> <reference_genome> <enzyme> [option]``` <br/>
+Example run: <br/>
+   #### Download test dataset for H9 chr11 (restriction enzyme: HindIII; genome build:hg19) from GSE130711
+   ```
+   wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/HiCorr_output.tar.gz 
+   tar -xvf HiCorr_output.tar.gz
+   ls
+   ls HiCorr_output
+   ```
+   #### Plot heatmaps
+   ```./HiCorr Heatmap chr11 130000000 130800000 HiCorr_output/anchor_2_anchor.loop.chr11 hg19 HindIII``` <br/>
+   You will see three png files named as "hg19.HindIII.chr11_130000000_130800000.raw.matrix.png", "hg19.HindIII.chr11_130000000_130800000.expt.matrix.png" and "hg19.HindIII.chr11_130000000_130800000.ratio.matrix.png" <br/>
+   <p float="center">
+      <img src="https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.HindIII.chr11_130000000_130800000.raw.matrix.png" width="200" />
+      <img src="https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.HindIII.chr11_130000000_130800000.expt.matrix.png" width="200" /> 
+      <img src="https://github.com/JinLabBioinfo/HiCorr/blob/master/png/hg19.HindIII.chr11_130000000_130800000.ratio.matrix.png" width="200" />
+   </p>
+   
 #### Options
 *  _Default_ <br/>
    By defult, heatmap mode will generates 3 heatmaps for the region you entered: a raw heatmap of observed reads, a heatmap of expected reads, and a heatmap of bias-corrected reads(as a ratio of observeds reads over expected reads). If you want all 3 of these heatmaps, leave the option as blank.
@@ -140,8 +168,6 @@ To run the Heatmap mode: <br/>
 * _-ratio_ <br/>
    Only generates a bias-corrected heatmap
 
-Sample Heatmaps
-![sample heatmaps](http://hiview.case.edu/test/sample/sample_heatmap.PNG)
 ### Next step analysis
-   We developed DeepLoop to remove noise and enhance signals from low-depth Hi-C data, See more details in https://github.com/JinLabBioinfo/DeepLoop
-
+   We developed DeepLoop to remove noise and enhance signals from low-depth Hi-C data, See more details in https://github.com/JinLabBioinfo/DeepLoop <br/>
+## 40 Processed Hi-C datasets by *HiCorr* and *DeepLoop* can be visualized in [website](https://hiview.case.edu/test/DeepLoop/) <br/>

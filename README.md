@@ -18,7 +18,7 @@ chmod -R 755 bin/*
 After you run the following commands, you will see "ref/" in the current directory. There are 4 subdirectories under "ref/": "DPNII/  eHiC/  eHiC-QC/  HindIII".
 In each subdirectory, there are reference files for genome build hg19 and mm10. </br>
 [More descriptions for the reference files](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/reference_file_description.md).</br>
-[How to generate reference files](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/Generate.reference.md)</br>
+
 ```
 wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files 
 # It needs ~103G space after decompress

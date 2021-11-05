@@ -101,6 +101,17 @@ eHiC mode corrects bias of eHi-C data. It takes two fragment-end-pair files as i
 To run the eHiC mode:<br/>
    ```./HiCorr eHiC <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome>```
 
+   
+### HiCorr test data (fragment loop, HindIII)
+This test dataset is Adrenal Hi-C.(restriction enzyme: HindIII; genome build:hg19) from GSE87112.
+```
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.Adrenal.cis.gz # cis fragment loop
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/frag_loop.Adrenal.trans.gz # trans fragment loop
+gunzip frag_loop.Adrenal.cis.gz
+gunzip frag_loop.Adrenal.trans.gz
+./HiCorr HindIII frag_loop.Adrenal.cis frag_loop.Adrenal.trans Adrenal hg19
+../HiCorr Heatmap chr1 119457772 120457772 HiCorr_output/anchor_2_anchor.loop.chr1 hg19 HindIII # plot Adrenal heatmap
+```
 
 ### HiCorr test data (bam, HindIII)
 This test dataset is subsampled bam file for H9 rep1 Hi-C.(restriction enzyme: HindIII; genome build:hg19) from GSE130711.

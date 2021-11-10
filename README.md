@@ -170,4 +170,4 @@ Example run: <br/>
 
 ### Next step analysis
    We developed DeepLoop to remove noise and enhance signals from low-depth Hi-C data, See more details in https://github.com/JinLabBioinfo/DeepLoop <br/>
-## 40 Processed Hi-C datasets by *HiCorr* and *DeepLoop* can be visualized in [website](https://hiview.case.edu/test/DeepLoop/) <br/>
+## 40 Processed Hi-C datasets by *HiCorr* and *DeepLoop* can be visualized in [website](https://hiview.case.edu/public/DeepLoop/) <br/>

@@ -1,4 +1,21 @@
-### HindIII
+# :point_down:  *HiCorr on HindIII enzyme Hi-C*
+- Download the code from this repository, "bin/HindIII/" <br/>
+- Download the reference files for HindIII (mm10/hg19 genome build)
+```
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HindIII_HiCorr_ref.tar.gz
+tar -xvf HindIII_HiCorr_ref.tar.gz
+```
+- Check the [preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>
+- Run HiCorr on HindIII Hi-C data:
+```
+bash HiCorr_HindIII.sh HindIII_HiCorr_ref/ bin/HindIII/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10>
+   # specify the path of downloaded unzipped reference file and scripts
+   # input two fragment loop files genrated from preprocessing step
+   # specifiy outputname prefix
+   # specify genome build, the provided reference only include hg19 and mm10
+```
+
+### details:
 HindIII corrects bias of HindIII Hi-C data. It takes two fragment-pair files as input and outputs an anchor_pair file. <br/>
 - The two input files: one file contains intra-chromosome looping fragment pairs(cis pairs), and another contains inter-chromosome looping fragment pairs(trans pairs).
    - Intra-chromosome looping pairs need to have 4 tab-delimited columns, in the following format:<br/>
@@ -13,9 +30,6 @@ HindIII corrects bias of HindIII Hi-C data. It takes two fragment-pair files as 
      <table><tr><td>anchor_id_1</td><td>anchor_id_2</td> <td>obserced_reads_count</td> <td>expected_reads_count</td> <td>p_value_ </td></tr></table>
    See sample file here: http://hiview.case.edu/test/sample/anchor_2_anchor.loop.IMR90.p_val.sample <br/>
 
-To run the HindIII mode:<br/>
-   ```./HiCorr HindIII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
-  
      
 ### HiCorr test data (fragment loop, HindIII)
 This test dataset is Adrenal Hi-C.(restriction enzyme: HindIII; genome build:hg19) from GSE87112.

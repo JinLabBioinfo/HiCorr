@@ -15,7 +15,7 @@ Each section descibes reference file downloading, preprocessing (mapping and fra
  ## :point_right:  [*HiCorr on eHi-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_eHi-C.md)
  ## :point_right:  [*HiCorr on in-situ Hi-C or DPNII/Mbol enzyme Hi-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_insituHi-C.md)
  ## :point_right:  [*Visualize HiCorr contact heatmaps*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_heatmap.md)
- ## :point_right:  [*Compatible with HiCPro valid pairs*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCpro%20validPairs%20input.md)
+ ## :point_right:  [*Compatible with HiCPro valid pairs*](https://github.com/shanshan950/Hi-C-data-preprocess/blob/master/documents/HiCPro_allValidPairs_to_Fragment.md)
  ## :point_right:  [*Generate reference files for HiCorr*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/generate_reference_files.md)
  
 ## :eyes: 40 Processed Hi-C datasets by *HiCorr* and *DeepLoop* can be visualized in [website](https://hiview.case.edu/public/DeepLoop/) <br/>

@@ -5,7 +5,7 @@
 wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HindIII_HiCorr_ref.tar.gz
 tar -xvf HindIII_HiCorr_ref.tar.gz
 ```
-- Check the [preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>
+- Check the [preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)]([https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh](https://github.com/shanshan950/Hi-C-data-preprocess/blob/master/documents/Fastq-to-FragmentContact.Tissue_example.md)) <br/>
 - Run HiCorr on HindIII Hi-C data:
 ```
 bash HiCorr_HindIII.sh HindIII_HiCorr_ref/ bin/HindIII/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10>

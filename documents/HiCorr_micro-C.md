@@ -1,3 +1,4 @@
+# :point_down:  *HiCorr on micro-C*
 - Download the code from this repository, "bin/microC/" <br/>
 - Download the reference files for micro-C (mm10/hg19 genome build)
 ```

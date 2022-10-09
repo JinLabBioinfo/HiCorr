@@ -1,4 +1,4 @@
- # :point_right:  *HiCorr on micro-C*
+ # :point_right:  [*HiCorr on micro-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_micro-C.md)
 - Download the code from this repository, "bin/microC/" <br/>
 - Download the reference files for micro-C (mm10/hg19 genome build)
 ```

@@ -8,7 +8,7 @@ tar -xvf microC_HiCorr.tar.gz
 - Check the [preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>
 - Run HiCorr on micor-C data:
 ```
-bash HiCorr_micro-C.sh microC_ref/ bin/microC/ <frag_loop.name.cis> <frag_loop.name.trans> <name> <hg19/mm10>
+bash HiCorr_micro-C.sh microC_ref/ bin/microC/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10>
    # specify the path of downloaded unzipped reference file and scripts
    # input two fragment loop files genrated from preprocessing step
    # specifiy outputname prefix

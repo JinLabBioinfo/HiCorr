@@ -1,12 +1,12 @@
 # *HiCorr on micro-C*
-Download the code from this repository <br/>
-Download the reference files for micro-C (mm10/hg19 genome build)
+- Download the code from this repository <br/>
+- Download the reference files for micro-C (mm10/hg19 genome build)
 ```
 wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/microC_HiCorr.tar.gz
 tar -xvf microC_HiCorr.tar.gz
 ```
-Check the preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops) <br/>
-Run HiCorr on micor-C data:
+- Check the [preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>
+- Run HiCorr on micor-C data:
 ```
 bash 
 ```

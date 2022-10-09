@@ -1,4 +1,4 @@
-# *HiCorr on micro-C*
+ # :point_right:  *HiCorr on micro-C*
 - Download the code from this repository, "bin/microC/" <br/>
 - Download the reference files for micro-C (mm10/hg19 genome build)
 ```
@@ -9,11 +9,13 @@ tar -xvf microC_HiCorr.tar.gz
 - Run HiCorr on micor-C data:
 ```
 bash HiCorr_micro-C.sh microC_ref/ bin/microC/ <frag_loop.name.cis> <frag_loop.name.trans> <name> <hg19/mm10>
-# specify the path of downloaded unzipped reference file and scripts
-# input two fragment loop files genrated from preprocessing step
-# specifiy outputname prefix
-# specify genome build, the provided reference only include hg19 and mm10
+   # specify the path of downloaded unzipped reference file and scripts
+   # input two fragment loop files genrated from preprocessing step
+   # specifiy outputname prefix
+   # specify genome build, the provided reference only include hg19 and mm10
 ```
+
+
 # *HiCorr*
 HiCorr is a pipeline designed to do bias-correction and visualization of Hi-C/eHi-C data. HiCorr focuses on the mapping of chromatin interactions at high-resolution, especially the sub-TAD enhancer-promoter interactions, which requires more rigorous bias-correction, especially the correction of distance biases. It needs to be run in an unix/linux environment. Currently it includes reference files of genome build hg19 and mm10.
 

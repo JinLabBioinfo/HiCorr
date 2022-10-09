@@ -18,9 +18,7 @@ Each section descibes reference file downloading, preprocessing (mapping and fra
  ## :point_right:  [*Compatible with HiCPro valid pairs*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCpro%20validPairs%20input.md)
  ## :point_right:  [*Generate reference files for HiCorr*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/generate_reference_files.md)
  
-### Next step analysis
-   We developed DeepLoop to remove noise and enhance signals from low-depth Hi-C data, See more details in https://github.com/JinLabBioinfo/DeepLoop <br/>
-## 40 Processed Hi-C datasets by *HiCorr* and *DeepLoop* can be visualized in [website](https://hiview.case.edu/public/DeepLoop/) <br/>
+## :eyes: 40 Processed Hi-C datasets by *HiCorr* and *DeepLoop* can be visualized in [website](https://hiview.case.edu/public/DeepLoop/) <br/>
 
 ## Citation: <br/>
 _Lu,L. et al._ Robust Hi-C Maps of Enhancer-Promoter Interactions Reveal the Function of Non-coding Genome in Neural Development and Diseases. Molecular Cell; doi: https://doi.org/10.1016/j.molcel.2020.06.007

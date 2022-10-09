@@ -4,7 +4,7 @@ HiCorr is a pipeline designed to do bias-correction and visualization of Hi-C/eH
 If you use HiCorr, please site:<br/>
 _Lu,L. et al._ Robust Hi-C Maps of Enhancer-Promoter Interactions Reveal the Function of Non-coding Genome in Neural Development and Diseases. Molecular Cell; doi: https://doi.org/10.1016/j.molcel.2020.06.007
 
-For any question about HiCorr, please contact xxl244@case.edu
+For any question about HiCorr, please contact ssz20@case.edu
 
 ## How to setup
 ### Download the code

@@ -1,7 +1,19 @@
-### DpnII/Mbol
-- The format of the two input files are the same as HindIII
-To run the DpNII/Mbol mode:<br/>
-   ```./HiCorr DPNII <cis_loop_file> <trans_loop_file> <name_of_your_data> <reference_genome> [options]```
+# :point_down:  *HiCorr on in-situ Hi-C or DPNII/Mbol enzyme Hi-C*
+- Download the code from this repository, "bin/DPNII/" <br/>
+- Download the reference files for DPNII (mm10/hg19 genome build)
+```
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/DPNII_HiCorr_ref.tar.gz
+tar -xvf DPNII_HiCorr_ref.tar.gz
+```
+- Check the [preprocessing for DPNII data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>
+- Run HiCorr on DPNII Hi-C data:
+```
+bash HiCorr_DPNIII.sh DPNII_HiCorr_ref/ bin/DPNII/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10>
+   # specify the path of downloaded unzipped reference file and scripts
+   # input two fragment loop files genrated from preprocessing step
+   # specifiy outputname prefix
+   # specify genome build, the provided reference only include hg19 and mm10
+```
 
 ### HiCorr test data (bam, DPNII)
 This test dataset is subsampled bam file for H1 Bio1Tech1Ind2 in-situ Hi-C.(restriction enzyme: DPNII; genome build:hg19) from 4DNES2M5JIGV.

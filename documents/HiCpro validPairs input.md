@@ -9,7 +9,7 @@
 lib=bin/preprocess/ # the path to lib of the bin/preprocess/
 validPair= # from HiCPro
 genome= # hg19/mm10
-fragbed= # enzyme fragment bed "frag_1"..., provided in HiCorr reference files, mm10 and hg19 are provided
+fragbed= # enzyme fragment bed "frag_1"..., found in HiCorr reference files, mm10 and hg19 are provided
 outputname= # your outpuname or sample name
 readlength= #The read length for mapping, e.g. 36, 50, or 100
 ```

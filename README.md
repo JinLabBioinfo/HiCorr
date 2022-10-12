@@ -9,8 +9,8 @@ chmod -R 755 bin/*
 ```
 ## Gateway for different Hi-C data type:
 Each section descibes reference file downloading, preprocessing (mapping and fragment filteration), and how to run HiCorr.
- ## :point_right:  [*HiCorr on micro-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_micro-C.md)
- ## :point_right:  [*HiCorr on Arima*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_Arima.md)
+ ## :point_right:  [*HiCorr on micro-C (beta version)*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_micro-C.md)
+ ## :point_right:  [*HiCorr on Arima (beta version)*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_Arima.md)
  ## :point_right:  [*HiCorr on HindIII enzyme Hi-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_HindIII.md)
  ## :point_right:  [*HiCorr on eHi-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_eHi-C.md)
  ## :point_right:  [*HiCorr on in-situ Hi-C or DPNII/Mbol enzyme Hi-C*](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/HiCorr_insituHi-C.md)

@@ -20,4 +20,4 @@ avg=float(sums)/count
 
 for frag in dic:
 #	print frag+"\t"+str(dic[frag])
-	print frag + '\t' + str(dic[frag]/avg)
+	print(frag + '\t' + str(dic[frag]/avg))

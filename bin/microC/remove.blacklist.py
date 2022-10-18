@@ -26,7 +26,7 @@ for line in sys.stdin:
 
 	if a1 not in bed and a2 not in bed and a1 != a2:
 
-		print line.rstrip()
+		print(line.rstrip())
 
 
 f.close()

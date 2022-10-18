@@ -1,10 +1,9 @@
 #!/bin/bash
 # This is to show process allValidPairs(HiCPro output) to fragment pairs that HiCorr can take as input
 lib=preprocess/lib
-ref=Arima_ref/
 allValidPairsFile=$1 # gz format, if not, remove gunzip in the following command
 name=$2 
-bed=$ref/
+bed=Arima_HiCorr_ref/hg19.Arima.frag.bed
 
 # 1. map allValidPairs read pairs to fragment pairs, and split to categories
 cat $allValidPairsFile | gunzip | cut -f2-7 | $lib/reads_2_trans_frag_loop.pl $bed 50 $name.loop.trans - & # 50 is read length for mapping
@@ -25,7 +24,7 @@ cat temp.$name.loop.outward | awk '{if($4>5000)print $0}' > temp.$name.loop.outw
 wait 
 # 3. merge fragment pairs
 $lib/merge_sorted_frag_loop.pl temp.$name.loop.samestrand temp.$name.loop.inward temp.$name.loop.outward > frag_loop.$name.cis &
-$lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.HK2662.trans &
+$lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.$name.trans &
 wait
 # 4. this step is to make sure both upper and lower triangle pairs are included, which can be used as HiCorr_Arima.sh input
 for file in frag_loop.$name.cis frag_loop.$name.trans;do

@@ -9,7 +9,6 @@
 fq1=$1
 fq2=$2
 name=$3
-genome=hg19
 hg19=hg19btIndex/hg19 # hg19 bowtieIndex
 hg19fai=hg19_bowtie2Index/hg19.fa.fai
 lib=HiCorr/bin/preprocess/ 
@@ -51,7 +50,7 @@ wait
 cat temp.$name.loop.inward | awk '{if($4>25000)print $0}' > temp.$name.loop.inward.filter &
 cat temp.$name.loop.outward | awk '{if($4>5000)print $0}' > temp.$name.loop.outward.filter &
 wait 
-# 7. merge bin pairs
+# 7. merge bin pairs (Note if you have multiple biological reps, run the first 6 steps for each rep, and merge in step 7)
 $lib/merge_sorted_frag_loop.pl temp.$name.loop.samestrand temp.$name.loop.inward.filter temp.$name.loop.outward.filter > frag_loop.$expt.cis &
 $lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.$name.trans &
 wait 

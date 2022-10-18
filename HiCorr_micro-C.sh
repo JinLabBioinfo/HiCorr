@@ -9,6 +9,8 @@ genome=$6
 anchorbed=${ref}/$genome.5kb.bed
 blacklist=${ref}/$genome.5kb.bed.blacklist
 lib=$bin
+#Python 2.7.5
+
 cat $cis | $lib/remove.blacklist.py $blacklist |awk '{if($4<=2000000) print $1,$2,$3,$4}' OFS='\t' | $lib/split_chromo.py $anchorbed
 
 cat $cis  | $lib/remove.blacklist.py $blacklist | awk '{if($4<=2000000) print $1,$2,$3,$4}' OFS='\t' | $lib/get_group_statistics.pl - $ref/$genome.dist.5kb.group > dist.stat

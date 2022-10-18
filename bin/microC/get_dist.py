@@ -34,7 +34,7 @@ for line in sys.stdin:
 
 		dist = bed[a2][0] - bed[a1][1] - 1
 
-	print("\t", line.rstrip(), '\t', str(dist))
+	print(line.rstrip() + '\t' + str(dist))
 
 
 

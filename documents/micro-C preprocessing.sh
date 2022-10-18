@@ -12,7 +12,7 @@ name=$3
 genome=hg19
 hg19=hg19btIndex/hg19 # hg19 bowtieIndex
 hg19fai=hg19_bowtie2Index/hg19.fa.fai
-lib=HiCorr/bin/microC/ 
+lib=HiCorr/bin/preprocess/ 
 ref=microc_ref/
 name=test # outputname as prefix
 ###################################################################################################

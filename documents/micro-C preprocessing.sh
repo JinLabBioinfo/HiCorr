@@ -12,7 +12,7 @@ name=$3
 hg19=hg19btIndex/hg19 # hg19 bowtieIndex
 hg19fai=hg19_bowtie2Index/hg19.fa.fai
 lib=HiCorr/bin/preprocess/ 
-ref=microc_ref/
+bed=microc_ref/hg19.500bp.bed
 name=test # outputname as prefix
 ###################################################################################################
 # 1. mapping
@@ -32,8 +32,7 @@ samtools sort -@ 10 $name.bam -o $name.sorted.bam
 samtools view $name.sorted.bam | $lib/remove_dup_PE_SAM_sorted.pl | samtools view -bS -t $hg19fai -o - - > $name.sorted.nodup.bam
 echo Total non-duplicated read pairs for $name is `samtools view $name.sorted.nodup.bam | wc -l | awk '{OFMT="%f"; print $1/2}'` >> summary.total.read_count
 # 5. categorize reads pair and map them to 500bp bin pairs
-bed=$ref/hg19.500bp.bed
-samtools view $name.sorted.bam | $lib/remove_dup_PE_SAM_sorted.pl | cut -f2-8 | $lib/bam_to_temp_HiC.pl > $name.temp
+samtools view $name.sorted.nodup.bam | cut -f2-8 | $lib/bam_to_temp_HiC.pl > $name.temp
 $lib/reads_2_cis_frag_loop.pl $bed 50 $name.loop.inward $name.loop.outward $name.loop.samestrand summary.frag_loop.read_count $name $name.temp & # 50 is read length for mapping
 $lib/reads_2_trans_frag_loop.pl $bed 50 $name.loop.trans $name.temp & # 50 is read length for mapping
 wait
@@ -51,10 +50,10 @@ cat temp.$name.loop.inward | awk '{if($4>25000)print $0}' > temp.$name.loop.inwa
 cat temp.$name.loop.outward | awk '{if($4>5000)print $0}' > temp.$name.loop.outward.filter &
 wait 
 # 7. merge bin pairs (Note if you have multiple biological reps, run the first 6 steps for each rep, and merge in step 7)
-$lib/merge_sorted_frag_loop.pl temp.$name.loop.samestrand temp.$name.loop.inward.filter temp.$name.loop.outward.filter > frag_loop.$expt.cis &
+$lib/merge_sorted_frag_loop.pl temp.$name.loop.samestrand temp.$name.loop.inward.filter temp.$name.loop.outward.filter > frag_loop.$name.cis &
 $lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.$name.trans &
 wait 
-echo $name "trans:" `cat frag_loop.$name.trans | awk '{sum+=$3}END{print sum/2}'` "cis:" `cat frag_loop.$name.cis | awk '{sum+=$3}END{print sum/2}'` "cis2M:" `cat frag_loop.$expt.cis | awk '{if($4<=2000000)print}' | awk '{sum+=$3}END{print sum/2}'` "cis200K:" `cat frag_loop.$expt.cis | awk '{if($4<=200000)print}' | awk '{sum+=$3}END{print sum/2}'` >> summary.total.read_count &
+echo $name "trans:" `cat frag_loop.$name.trans | awk '{sum+=$3}END{print sum/2}'` "cis:" `cat frag_loop.$name.cis | awk '{sum+=$3}END{print sum/2}'` "cis2M:" `cat frag_loop.$name.cis | awk '{if($4<=2000000)print}' | awk '{sum+=$3}END{print sum/2}'` "cis200K:" `cat frag_loop.$expt.cis | awk '{if($4<=200000)print}' | awk '{sum+=$3}END{print sum/2}'` >> summary.total.read_count &
 # 8. clean UP, frag_loop.$expt.cis and frag_loop.$name.trans are the input files for HiCorr_microC.sh 
 rm -f  $fq1 $fq2 $name.R1.sam $name.R2.sam $name.R1.sorted.bam $name.R2.sorted.bam $name.bam temp.$name.loop.inward.filter temp.$name.loop.outward.filter temp.$name.loop.inward temp.$name.loop.outward
  

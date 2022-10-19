@@ -16,7 +16,8 @@ df$read=df[,1]*df[,2]
 data$read=0
 data[rownames(df),'read']=df$read
 data$avg=data$read/data[,1]
-data[,2:3]=NULL
+data[,2]=NULL
+data[,3]=NULL
 data$read=NULL
 write.table(data,'integrated.dist.len.stat',sep='\t',quote=F,col.names=F)
 

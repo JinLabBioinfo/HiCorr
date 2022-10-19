@@ -32,5 +32,17 @@ $lib/count_trans_pairs_by_GC.pl $genome.$enzymeName.anchor.5kb.bed $genome.$enzy
 bedtools intersect -wa -a $genome.$enzymeName.anchor.5kb.bed -b $blackregion | cut -f4 | sort -u > $genome.$enzymeName.anchor.5kb.bed.blacklist
 # 6. generate all possible pairs within 2Mb
 $lib/list_full_matrix.pl $genome.$enzymeName.anchor.5kb.bed 2000000 | python $lib/remove.blacklist.py $genome.$enzymeName.anchor.5kb.blacklist > $genome.full.filter.matrix 
+# 7. generate distance group within 2Mb
+### "$genome.dist.5kb.group" contains distance groups (401 groups for 200,0000)
+# 1       -1      1000
+# 2       1001    5000
+# 3       5001    10000
+# 4       10001   15000
+# ...
+# 400     1990001 1995000
+#401     1995001 2e+06
+# 8. generate distance stat 
+cat $ref/$genome.full.filter.matrix | $lib/get_group_statistics.pl - $ref/$genome.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $ref/$genome.full.dist.stat.5kb
+
 ## end  ####################################################################################################
 ```

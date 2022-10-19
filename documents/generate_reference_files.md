@@ -1,5 +1,5 @@
 
-# prepare files ##########################################################################################
+# prepare reference file ##########################################################################################
 - 1. genome build. e.g. hg19
   - download chrom.sizes: wget https://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/hg19.chrom.sizes
   - donwload fa directory: wget https://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/hg19.fa.gz
@@ -9,6 +9,7 @@
 ```
 genome_fa_dir=
 genome_chrom_size=
+# for example: DpnII-->GATC; HindIII-->AAGCTT. This would depend on which enzyme you use for Hi-C experiment. 
 cutsite=
 blackregion=
 lib=HiCorr/bin/generateReference_lib/
@@ -17,10 +18,10 @@ lib=HiCorr/bin/generateReference_lib/
 ## start build references #################################################################################
 # 1. generate fragment bed file
 $lib/find_RE_sites.pl $genome_fa_dir $genome_chrom_size $cutsite> $genome.cutting.sites 
-$lib/sites_to_frag.py $genome_chrom_size $genome.cutting.sites | awk '{print $0,$3-$2+1}' OFS='\t' >  $genome.frag.bed
-# 2. generate ~5kb anchor
-$lib/generate.fragment.py $genome.frag.bed 5000 > frag.2.anchor 
-$lib/get_aveg_frag_length.py frag.2.anchor anchor.bed > $genome.anchor.5kb.bed
+python3 $lib/sites_to_frag.py $genome_chrom_size $genome.cutting.sites | awk '{print $0,$3-$2+1}' OFS='\t' >  $genome.frag.bed
+# 2. generate ~5kb anchor (Here we average each fragment into ~5kb anchor)
+python3 $lib/generate.fragment.py $genome.frag.bed 5000 > frag.2.anchor 
+python3 $lib/get_aveg_frag_length.py frag.2.anchor anchor.bed > $genome.anchor.5kb.bed
 mkdir $genome.anchor.5kb
 cat $genome.anchor.5kb.bed | awk '{print>"'$genome'".anchor.5kb/$1".bed"}'
 # 3. divide all anchors by their length to 20 groups
@@ -30,7 +31,7 @@ $lib/count_trans_pairs_by_GC.pl $genome.anchor.5kb.bed $genome.anchor.5kb.bed ${
 # 5. generate anchors overlapping black regions
 bedtools intersect -wa -a $genome.anchor.5kb.bed -b $blackregion | cut -f4 | sort -u > $genome.anchor.5kb.bed.blacklist
 # 6. generate all possible pairs within 2Mb
-$lib/list_full_matrix.pl $genome.anchor.5kb.bed 2000000 | python $lib/remove.blacklist.py $genome.anchor.5kb.blacklist > $genome.full.filter.matrix 
+$lib/list_full_matrix.pl $genome.anchor.5kb.bed 2000000 | python3 $lib/remove.blacklist.py $genome.anchor.5kb.blacklist > $genome.full.filter.matrix 
 # 7. generate distance group within 2Mb
 ### "$genome.dist.5kb.group" contains distance groups (401 groups for 200,0000)
 # 1       -1      1000

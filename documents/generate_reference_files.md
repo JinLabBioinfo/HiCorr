@@ -1,6 +1,6 @@
 
 # prepare reference file ##########################################################################################
-- 1. genome build. e.g. hg19
+- 1. Genome build version. e.g. hg19
   - download chrom.sizes: wget https://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/hg19.chrom.sizes
   - donwload fa directory: wget https://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/hg19.fa.gz
   - download blacklist region: https://github.com/Boyle-Lab/Blacklist
@@ -17,22 +17,28 @@ lib=HiCorr/bin/generateReference_lib/
 
 ## start build references #################################################################################
 # 1. generate fragment bed file
-$lib/find_RE_sites.pl $genome_fa_dir $genome_chrom_size $cutsite> $genome.cutting.sites 
+$lib/find_RE_sites.pl $genome_fa_dir $genome_chrom_size $cutsite> $genome.cutting.sites
 python3 $lib/sites_to_frag.py $genome_chrom_size $genome.cutting.sites | awk '{print $0,$3-$2+1}' OFS='\t' >  $genome.frag.bed
+
 # 2. generate ~5kb anchor (Here we average each fragment into ~5kb anchor)
 python3 $lib/generate.fragment.py $genome.frag.bed 5000 > frag.2.anchor 
 python3 $lib/get_aveg_frag_length.py frag.2.anchor anchor.bed > $genome.anchor.5kb.bed
 mkdir $genome.anchor.5kb
 cat $genome.anchor.5kb.bed | awk '{print>"'$genome'".anchor.5kb/$1".bed"}'
-# 3. divide all anchors by their average length to 20 groups
+
+# 3. divided all anchor based on their length into 20 equal size groups
 $lib/get_group_range.pl $genome.anchor.5kb.bed 6 20 > $genome_anchor_length.groups
-# 4. generate possible trans contacts anchor pairs
+
+# 4. generate all possible trans contact matric
 $lib/count_trans_pairs_by_GC.pl $genome.anchor.5kb.bed $genome.anchor.5kb.bed ${genome}_anchor_length.groups > $genome.trans.possible.pairs
-# 5. generate anchors overlapping black regions
+
+# 5. generate anchor to blacklist file by overlaping 5kb anchor and blacklist region
 bedtools intersect -wa -a $genome.anchor.5kb.bed -b $blackregion | cut -f4 | sort -u > $genome.anchor.5kb.bed.blacklist
-# 6. generate all possible pairs within 2Mb
-$lib/list_full_matrix.pl $genome.anchor.5kb.bed 2000000 | python3 $lib/remove.blacklist.py $genome.anchor.5kb.blacklist > $genome.full.filter.matrix 
-# 7. generate distance group within 2Mb
+
+# 6. generate all possible pairs within 2Mb (blacklist has been removed)
+$lib/list_full_matrix.pl $genome.anchor.5kb.bed 2000000 | python3 $lib/remove.blacklist.py $genome.anchor.5kb.blacklist > $genome.full.filter.matrix
+
+# 7. Set up 400 groups for distance within 0-2Mb (5kb per group)
 ### "$genome.dist.5kb.group" contains distance groups (401 groups for 200,0000)
 # 1       -1      1000
 # 2       1001    5000
@@ -41,6 +47,7 @@ $lib/list_full_matrix.pl $genome.anchor.5kb.bed 2000000 | python3 $lib/remove.bl
 # ...
 # 400     1990001 1995000
 #401     1995001 2e+06
+
 # 8. generate distance stat 
 cat $ref/$genome.full.filter.matrix | $lib/get_group_statistics.pl - $ref/$genome.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $ref/$genome.full.dist.stat.5kb
 

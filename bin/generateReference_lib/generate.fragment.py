@@ -15,7 +15,7 @@ def print_info(id, val):
 
 		for frag in array:
 
-			print frag + '\t' + id
+			print(frag + '\t' + id)
 
 
 

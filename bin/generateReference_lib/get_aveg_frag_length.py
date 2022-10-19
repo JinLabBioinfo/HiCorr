@@ -41,7 +41,7 @@ with open(sys.argv[2],'r') as f:
 		
 
 
-		print '\t'.join([chr, beg, end, anchor, length, str(avg)])
+		print('\t'.join([chr, beg, end, anchor, length, str(avg)]))
 
 
 f.close()

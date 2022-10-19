@@ -24,7 +24,7 @@ python3 $lib/generate.fragment.py $genome.frag.bed 5000 > frag.2.anchor
 python3 $lib/get_aveg_frag_length.py frag.2.anchor anchor.bed > $genome.anchor.5kb.bed
 mkdir $genome.anchor.5kb
 cat $genome.anchor.5kb.bed | awk '{print>"'$genome'".anchor.5kb/$1".bed"}'
-# 3. divide all anchors by their length to 20 groups
+# 3. divide all anchors by their average length to 20 groups
 $lib/get_group_range.pl $genome.anchor.5kb.bed 6 20 > $genome_anchor_length.groups
 # 4. generate possible trans contacts anchor pairs
 $lib/count_trans_pairs_by_GC.pl $genome.anchor.5kb.bed $genome.anchor.5kb.bed ${genome}_anchor_length.groups > $genome.trans.possible.pairs

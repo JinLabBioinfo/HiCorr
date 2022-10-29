@@ -2,16 +2,16 @@
 ### prepare: ######################################################################################
 fq1=$1
 fq2=$2
-name=$3
+name=$3 # outputname as prefix
 hg19=hg19btIndex/hg19 # hg19 bowtieIndex
 hg19fai=hg19_bowtie2Index/hg19.fa.fai
 lib=HiCorr/bin/preprocess/ 
 bed=Arima_HiCorr_ref/hg19.Arima.frag.bed
-name=test # outputname as prefix
+
 ###################################################################################################
 # 1. mapping, take 50bp for mapping
-cat $fq1 | $lib/reform_fastq.for.public.tissue.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R1.sam &
-cat $fq2 | $lib/reform_fastq.for.public.tissue.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R2.sam &
+cat $fq1 | $lib/reformat_fastq.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R1.sam &
+cat $fq2 | $lib/reformat_fastq.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R2.sam &
 wait
 # 2. sam to sorted bam 
 echo Total reads count for $name is `samtools view $name.R1.sam | grep -vE ^@ | wc -l | awk '{OFMT="%f"; print $1}'` >> summary.total.read_count &

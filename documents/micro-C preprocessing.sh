@@ -54,6 +54,5 @@ $lib/merge_sorted_frag_loop.pl temp.$name.loop.samestrand temp.$name.loop.inward
 $lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.$name.trans &
 wait 
 echo $name "trans:" `cat frag_loop.$name.trans | awk '{sum+=$3}END{print sum/2}'` "cis:" `cat frag_loop.$name.cis | awk '{sum+=$3}END{print sum/2}'` "cis2M:" `cat frag_loop.$name.cis | awk '{if($4<=2000000)print}' | awk '{sum+=$3}END{print sum/2}'` "cis200K:" `cat frag_loop.$expt.cis | awk '{if($4<=200000)print}' | awk '{sum+=$3}END{print sum/2}'` >> summary.total.read_count &
-# 8. clean UP, frag_loop.$expt.cis and frag_loop.$name.trans are the input files for HiCorr_microC.sh 
-rm -f  $fq1 $fq2 $name.R1.sam $name.R2.sam $name.R1.sorted.bam $name.R2.sorted.bam $name.bam temp.$name.loop.inward.filter temp.$name.loop.outward.filter temp.$name.loop.inward temp.$name.loop.outward
- 
+#frag_loop.$expt.cis and frag_loop.$name.trans are the input files for HiCorr_microC.sh 
+

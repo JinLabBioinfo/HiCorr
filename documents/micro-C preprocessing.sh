@@ -8,12 +8,12 @@
 ### prepare: ######################################################################################
 fq1=$1
 fq2=$2
-name=$3
+name=$3 # outputname as prefix
 hg19=hg19btIndex/hg19 # hg19 bowtieIndex
 hg19fai=hg19_bowtie2Index/hg19.fa.fai
 lib=HiCorr/bin/preprocess/ 
 bed=microc_ref/hg19.500bp.bed
-name=test # outputname as prefix
+
 ###################################################################################################
 # 1. mapping
 zcat ${fq1} | bowtie -v 3 -m 1 --best --strata --time -p 10  --sam $hg19  -  $name.R1.sam  &

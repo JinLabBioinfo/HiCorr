@@ -9,9 +9,10 @@ lib=HiCorr/bin/preprocess/
 bed=Arima_HiCorr_ref/hg19.Arima.frag.bed
 
 ###################################################################################################
+### Note: you can use different mapper and read length for mapping ################################
 # 1. mapping, take 50bp for mapping
-cat $fq1 | $lib/reformat_fastq.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R1.sam &
-cat $fq2 | $lib/reformat_fastq.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R2.sam &
+cat $fq1 | $lib/reformat_fastq.py 1 50 | $bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R1.sam &
+cat $fq2 | $lib/reformat_fastq.py 1 50 | $bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R2.sam &
 wait
 # 2. sam to sorted bam 
 echo Total reads count for $name is `samtools view $name.R1.sam | grep -vE ^@ | wc -l | awk '{OFMT="%f"; print $1}'` >> summary.total.read_count &
@@ -27,7 +28,7 @@ samtools view $name.sorted.bam | $lib/remove_dup_PE_SAM_sorted.pl | samtools vie
 echo Total non-duplicated read pairs for $name is `samtools view $name.sorted.nodup.bam | wc -l | awk '{OFMT="%f"; print $1/2}'` >> summary.total.read_count
 # 5. categorize reads pair and map them to Airma fragment pairs
 samtools view $name.sorted.nodup.bam | cut -f2-8 | $lib/bam_to_temp_HiC.pl > $name.temp
-$lib/reads_2_cis_frag_loop.pl $bed 50 $name.loop.inward $name.loop.outward $name.loop.samestrand summary.frag_loop.read_count $name $name.temp & # 50 is read length for mapping
+$lib/reads_2_cis_frag_loop.pl $bed 50 $name.loop.inward $name.loop.outward $name.loop.samestrand $name $name.temp & # 50 is read length for mapping
 $lib/reads_2_trans_frag_loop.pl $bed 50 $name.loop.trans $name.temp & # 50 is read length for mapping
 wait
 for file in $name.loop.inward $name.loop.outward $name.loop.samestrand;do
@@ -36,7 +37,7 @@ done
 cat $name.loop.trans | $lib/summary_sorted_trans_frag_loop.pl - > temp.$name.loop.trans &
 wait
 for file in $name.loop.inward $name.loop.outward $name.loop.samestrand;do
-        $lib/resort_by_frag_id.pl $bed temp.$file &
+        $lib/resort_by_frag_id.pl $bed temp.$file $lib &
 done
 wait
 # 6. filter the fragment pairs:
@@ -49,5 +50,6 @@ $lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.$name.trans &
 wait 
 echo $name "trans:" `cat frag_loop.$name.trans | awk '{sum+=$3}END{print sum/2}'` "cis:" `cat frag_loop.$name.cis | awk '{sum+=$3}END{print sum/2}'` "cis2M:" `cat frag_loop.$name.cis | awk '{if($4<=2000000)print}' | awk '{sum+=$3}END{print sum/2}'` >> summary.total.read_count 
 # 8. clean UP, frag_loop.$expt.cis and frag_loop.$name.trans are the input files for HiCorr_microC.sh 
-rm -f $fq1 $fq2 $name.R1.sam $name.R2.sam $name.R1.sorted.bam $name.R2.sorted.bam $name.bam temp.$name.loop.inward.filter temp.$name.loop.outward.filter temp.$name.loop.inward temp.$name.loop.outward
+rm -f temp.$name.loop.inward.filter temp.$name.loop.outward.filter temp.$name.loop.inward temp.$name.loop.outward
+
 

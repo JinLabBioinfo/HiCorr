@@ -117,7 +117,9 @@ with open(sys.argv[1],'r') as f:
 				curr_len = length
 				curr_beg = beg
 f.close()
-
+if curr_len!=0:
+        anchor.write(curr_chr+'\t'+curr_beg+'\t'+curr_end+'\t'+'A_'+str(index)+'\t'+str(curr_len)+'\n')
+        print_info('A_'+str(index), frag_list)
 anchor.close()	
 				
 #frag_to_anchor.close()

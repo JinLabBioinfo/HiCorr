@@ -27,6 +27,6 @@ for file in `ls split/`;do
         cat $anchorbed | awk '{if($1=="'$chr'")print}' | $lib/list_full_matrix.pl - 2000000 | perl $lib/merge_sorted_anchor_loop.pl - split/$file | $lib/get_loop_lambda.pl $ref/$genome.dist.5kb.group integrated.dist.len.stat | $lib/add.vis.to.cis.2M.pl - anchor.vis.list > temp
         mv temp split/anchor_2_anchor.loop.$chr
 done
-mv split HiCorr
+mv split ${name}.HiCorr_output
 wait
 exit

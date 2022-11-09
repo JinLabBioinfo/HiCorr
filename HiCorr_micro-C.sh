@@ -11,8 +11,8 @@ blacklist=${ref}/$genome.5kb.bed.blacklist
 lib=$bin
 #
 # fragment pairs to anchorpairs 
-$lib/fragdata_to_anchordata.pl $cis $ref/hg19.500bp_5kb | $lib/remove.blacklist.py $blacklist | $lib/get_dist.py $anchorbed > end_loop.$name.cis &
-$lib/fragdata_to_anchordata.pl $trans $ref/hg19.500bp_5kb | $lib/remove.blacklist.py $blacklist > end_loop.$name.trans &
+$lib/fragdata_to_anchordata.pl $cis $ref/$genome.500bp_5kb | $lib/remove.blacklist.py $blacklist | $lib/get_dist.py $anchorbed > end_loop.$name.cis &
+$lib/fragdata_to_anchordata.pl $trans $ref/$genome.500bp_5kb | $lib/remove.blacklist.py $blacklist > end_loop.$name.trans &
 wait 
 
 cat end_loop.$name.cis | awk '{if($4<=2000000) print $1,$2,$3,$4}' OFS='\t' | $lib/split_chromo.py $anchorbed & 

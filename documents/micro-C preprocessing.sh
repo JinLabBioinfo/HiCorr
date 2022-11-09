@@ -3,8 +3,6 @@
 # cat 4DNES21D8SP8_raw_files_2021-***.tsv | grep $fq1 | cut -f1 | xargs -n 1 curl -O -L --user  
 # cat 4DNES21D8SP8_raw_files_2021-***.tsv | grep $fq2 | cut -f1 | xargs -n 1 curl -O -L --user 
 # downloaded files are *.fastq.gz 
-
-
 ### prepare: ######################################################################################
 fq1=$1
 fq2=$2
@@ -15,10 +13,11 @@ lib=HiCorr/bin/preprocess/
 bed=microc_ref/hg19.500bp.bed
 
 ###################################################################################################
-# 1. mapping
+# 1. mapping using bowtie, or any mapper you prefer
 zcat ${fq1} | bowtie -v 3 -m 1 --best --strata --time -p 10  --sam $hg19  -  $name.R1.sam  &
 zcat ${fq2} | bowtie -v 3 -m 1 --best --strata --time -p 10  --sam $hg19  -  $name.R2.sam  &
 wait
+
 # 2. sam to sorted bam 
 echo Total reads count for $name is `samtools view $name.R1.sam | grep -vE ^@ | wc -l | awk '{OFMT="%f"; print $1}'` >> summary.total.read_count &
 samtools view -u $name.R1.sam | samtools sort -@ 12 -n -T $name.R1 -o $name.R1.sorted.bam  &

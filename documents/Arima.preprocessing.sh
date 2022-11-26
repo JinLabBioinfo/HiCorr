@@ -22,7 +22,7 @@ wait
 # 3. pair two sam & sort
 $lib/pairing_two_SAM_reads.pl <(samtools view $name.R1.sorted.bam) <(samtools view $name.R2.sorted.bam) | samtools view -bS -t $hg19fai -o - - > $name.bam
 echo Uniquely mapped read pairs for $name is `samtools view $name.bam | wc -l | awk '{OFMT="%f"; print $1/2}'` >> summary.total.read_count  &
-samtools sort -@ 10 $name.bam -o $name.sorted.bam
+samtools sort -@ 10 -m 4G -n -T $name -o $name.sorted.bam $name.bam 
 # 4. remove dups
 samtools view $name.sorted.bam | $lib/remove_dup_PE_SAM_sorted.pl | samtools view -bS -t $hg19fai -o - - > $name.sorted.nodup.bam
 echo Total non-duplicated read pairs for $name is `samtools view $name.sorted.nodup.bam | wc -l | awk '{OFMT="%f"; print $1/2}'` >> summary.total.read_count
@@ -49,7 +49,7 @@ $lib/merge_sorted_frag_loop.pl temp.$name.loop.samestrand temp.$name.loop.inward
 $lib/merge_sorted_frag_loop.pl temp.$name.loop.trans > frag_loop.$name.trans &
 wait 
 echo $name "trans:" `cat frag_loop.$name.trans | awk '{sum+=$3}END{print sum/2}'` "cis:" `cat frag_loop.$name.cis | awk '{sum+=$3}END{print sum/2}'` "cis2M:" `cat frag_loop.$name.cis | awk '{if($4<=2000000)print}' | awk '{sum+=$3}END{print sum/2}'` >> summary.total.read_count 
-# 8. clean UP, frag_loop.$expt.cis and frag_loop.$name.trans are the input files for HiCorr_microC.sh 
+# 8. clean UP, frag_loop.$expt.cis and frag_loop.$name.trans are the input files for HiCorr 
 rm -f temp.$name.loop.inward.filter temp.$name.loop.outward.filter temp.$name.loop.inward temp.$name.loop.outward
 
 

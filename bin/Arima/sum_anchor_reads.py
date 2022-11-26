@@ -18,4 +18,4 @@ while True:
 file.close()
 
 for frag in dic:
-	print(frag, str(dic[frag]),sep='\t')
+	print(frag+"\t"+str(dic[frag]))

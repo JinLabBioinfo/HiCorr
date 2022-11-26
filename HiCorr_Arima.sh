@@ -43,4 +43,3 @@ wait
 cat end_loop.after.vis | $bin/split_chromo.py $anchorbed 
 
 rm -rf end_loop.2M.rmbl end_loop.gt.2M end_loop.rmbl.trans 
-mv split HiCorr

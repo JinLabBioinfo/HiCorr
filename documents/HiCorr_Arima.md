@@ -6,6 +6,7 @@ wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/Arima_HiCorr_ref.tar.gz
 tar -xvf Arima_HiCorr_ref.tar.gz
 ```
 - Check the [preprocessing for Arima data (mapping, fragments filter, outs are cis and trans fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/Arima.preprocessing.sh) <br/>
+- One [example log](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/Arima.preprocessing.example.sh) for preprocessing two biological reps of Arima Hi-C
 - Run HiCorr on Arima data:
 ```
 bash HiCorr_Arima.sh Arima_HiCorr_ref/ bin/Arima/ <frag_loop.name.cis> <frag_loop.name.trans> <name> <hg19/mm10>

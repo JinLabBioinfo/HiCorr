@@ -2,7 +2,7 @@
 - Download the code from this repository, "bin/DPNII/" <br/>
 - Download the reference files for DPNII (mm10/hg19 genome build)
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/DPNII_HiCorr_ref.tar.gz
+wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/DPNII_HiCorr_ref.tar.gz
 tar -xvf DPNII_HiCorr_ref.tar.gz
 ```
 - Check the [preprocessing for DPNII data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>

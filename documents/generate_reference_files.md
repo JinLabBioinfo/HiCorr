@@ -60,6 +60,6 @@ $lib/list_full_matrix.pl ${genome}_${enzyme}_anchors_avg.bed 2000000 | python3 $
 # 400     1990001 1995000
 #401     1995001 2e+06
 cp HiCorr/bin/dist.401.group ${genome}.dist.401.group
-# 8. generate distance stat 
-$lib/get_group_statistics.pl ${genome}.full.matrix ${genome}_${enzyme}_anchors_avg.bed $genome_anchor_length.groups $genome.dist.5kb.group ${genome}_${enzyme}_anchors_avg.bed | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
+# 8. To create length and distance statistical file for full matrix 
+$lib/get_group_statistics.pl ${genome}.full.matrix ${genome}_${enzyme}_anchors_avg.bed $genome_anchor_length.groups $genome.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
 ```

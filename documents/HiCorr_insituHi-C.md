@@ -1,6 +1,6 @@
 # :point_down:  *HiCorr on in-situ Hi-C or DPNII/Mbol enzyme Hi-C*
 - Download the code from this repository, "bin/DPNII/" <br/>
-- Download the reference files for DPNII (mm10/hg19 genome build)
+- Download the reference files for DPNII (mm10/hg19/hg38 genome build)
 ```
 wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/DPNII_HiCorr_ref.tar.gz
 tar -xvf DPNII_HiCorr_ref.tar.gz

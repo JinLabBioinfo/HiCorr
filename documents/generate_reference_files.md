@@ -40,10 +40,10 @@ mkdir $genome.anchor.5kb
 cat ${genome}_${enzyme}_anchors_avg.bed | cut -f1-4 | awk '{print>"'$genome'"".anchor.5kb/"$1".bed"}'
 
 # 3. divided all anchor based on their length into 20 equal size groups 
-$lib/get_group_range.pl ${genome}_${enzyme}_anchors_avg.bed 6 20 > $genome_anchor_length.groups
+$lib/get_group_range.pl ${genome}_${enzyme}_anchors_avg.bed 6 20 > ${genome}_anchor_length.groups
 
 # 4. generate all possible trans contact matric 
-$lib/count_trans_pairs_by_GC.pl ${genome}_${enzyme}_anchors_avg.bed ${genome}_${enzyme}_anchors_avg.bed $genome_anchor_length.groups > $genome.trans.possible.pairs
+$lib/count_trans_pairs_by_GC.pl ${genome}_${enzyme}_anchors_avg.bed ${genome}_${enzyme}_anchors_avg.bed ${genome}_anchor_length.groups > $genome.trans.possible.pairs
 
 # 5. generate anchor to blacklist file by overlaping 5kb anchor and blacklist region
 bedtools intersect -wa -a ${genome}_${enzyme}_anchors_avg.bed -b $blackregion | cut -f1-4 | sort -u > ${genome}_5kb_anchors_blacklist
@@ -61,5 +61,6 @@ $lib/list_full_matrix.pl ${genome}_${enzyme}_anchors_avg.bed 2000000 | python3 $
 #401     1995001 2e+06
 cp HiCorr/bin/dist.401.group ${genome}.dist.401.group
 # 8. To create length and distance statistical file for full matrix 
-$lib/get_group_statistics.pl ${genome}.full.matrix ${genome}_${enzyme}_anchors_avg.bed $genome_anchor_length.groups $genome.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
+$lib/get_group_statistics.pl ${genome}.full.matrix ${genome}_${enzyme}_anchors_avg.bed ${genome}_anchor_length.groups $genome.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
+
 ```

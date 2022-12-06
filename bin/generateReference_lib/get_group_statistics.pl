@@ -87,6 +87,16 @@ foreach my $g1 (sort {$a<=>$b} keys %{$g_sum}){
 		}
 	}
 }
+sub get_id{
+        my ($val, $range) = @_;
+        foreach my $id (keys %{$range}){
+                my ($min, $max) = split ":", $range->{$id};
+                if($val > $min && $val <= $max){
+                        return $id;
+                }
+        }
+        die("Error: did not find a group\n");
+}
 
 exit;
 

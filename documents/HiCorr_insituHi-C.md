@@ -5,7 +5,7 @@
 wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/DPNII_HiCorr_ref.tar.gz
 tar -xvf DPNII_HiCorr_ref.tar.gz
 ```
-- Check the [preprocessing for DPNII data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/DPNII_preprocessing.sh) <br/>
+- Check the [preprocessing for DPNII data (mapping, fragments filter, outs are cis and trans DPNII fragment contacts)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/DPNII_preprocessing.sh) <br/>
 - Run HiCorr on DPNII Hi-C data:
 ```
 bash HiCorr_DPNIII.sh DPNII_HiCorr_ref/ bin/DPNII/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10>

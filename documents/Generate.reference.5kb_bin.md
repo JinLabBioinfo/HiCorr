@@ -25,7 +25,7 @@ genome=hg38
 genome_fa_dir=./chroms/
 genome_chrom_size=./hg38.chrom.sizes.reformat
 blackregion=./hg38.blacklist.bed
-HiCorr_path=HiCorr/bin/generateReference_lib/
+HiCorr_path=HiCorr/
 output=./hg38_bin
 mkdir $output
 chmod +x $lib/*
@@ -37,6 +37,6 @@ bedtools intersect -wa -a hg38.5kb.bed -b hg38.blacklist.bed | cut -f1-4 | sort 
 bedtools intersect -wa -wb -a hg38.500bp.bed -b hg38.5kb.bed | awk '{print $4 "\t" $8}' > hg38.500bp_5kb
 cp ${HiCorr_path}/bin/dist.401.group hg38.dist.5kb.group
 ${HiCorr_path}/bin/generateReference_lib/list_full_matrix.pl hg38.5kb.bed 2000000 | python $lib/remove.blacklist.py hg38.5kb.bed.blacklist > hg38.full.filter.matrix &
-${HiCorr_path}/bin/microC/get_group_statistics.pl hg38.full.filter.matrix $genome.dist.5kb.group  | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
+${HiCorr_path}/bin/microC/get_group_statistics.pl hg38.full.filter.matrix hg38.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
 
 ```

@@ -20,16 +20,6 @@ cat <(cat hg38.chrom.sizes | grep -v "_\|M" | sed s/"chr"//g | sort -gk 1 | grep
     <(cat hg38.chrom.sizes | grep -v "_\|M" | sed s/"chr"//g | sort -gk 1 | grep 'X\|Y') \
     | awk '{print "chr"$0}' > hg38.chrom.sizes.reformat
 
-
-genome=hg38
-genome_fa_dir=./chroms/
-genome_chrom_size=./hg38.chrom.sizes.reformat
-blackregion=./hg38.blacklist.bed
-HiCorr_path=HiCorr/
-output=./hg38_bin
-mkdir $output
-chmod +x $lib/*
-
 ## start build references #################################################################################
 bedtools makewindows -g hg38.chrom.sizes.reformat -w 500 | awk '{print $1 "\t" $2+1 "\t" $3 "\t" "frag_"NR}' > hg38.500bp.bed
 bedtools makewindows -g hg38.chrom.sizes.reformat -w 5000 | awk '{print $1 "\t" $2+1 "\t" $3 "\t" "A_"NR}' > hg38.5kb.bed

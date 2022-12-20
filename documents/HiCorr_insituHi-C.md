@@ -8,7 +8,7 @@ tar -xvf DPNII_HiCorr_ref.tar.gz
 - Check the [preprocessing for DPNII data (mapping, fragments filter, outs are cis and trans DPNII fragment contacts)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/DPNII_preprocessing.sh) <br/>
 - Run HiCorr on DPNII Hi-C data:
 ```
-bash HiCorr_DPNIII.sh DPNII_HiCorr_ref/ bin/DPNII/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10>
+bash HiCorr_DPNIII.sh DPNII_HiCorr_ref/ bin/DPNII/ <frag_loop.name.cis> <frag_loop.name.trans> <outputname> <hg19/mm10/hg38>
    # specify the path of downloaded unzipped reference file and scripts
    # input two fragment loop files genrated from preprocessing step
    # specifiy outputname prefix

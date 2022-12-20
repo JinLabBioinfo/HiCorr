@@ -26,6 +26,7 @@ for file in $outputname.loop.inward $outputname.loop.outward $outputname.loop.sa
         $lib/resort_by_frag_id.pl $fragbed temp.$file $lib &
 done
 wait
+# filter
 cat temp.$outputname.loop.inward | awk '{if($4>1000)print $0}' > temp.$outputname.loop.inward.filter
 cat temp.$outputname.loop.outward | awk '{if($4>5000)print $0}' > temp.$outputname.loop.outward.filter
 

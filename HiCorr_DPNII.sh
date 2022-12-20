@@ -28,7 +28,7 @@ ${bin}/get_corr_factor_by_len_DPNII.py trans.stat > len.factor
 
 $bin/correct.trans.reads.by.corr_DPNII.pl end_loop.merged.trans $anchorbed $ref/${genome}_anchor_length.groups len.factor > trans.corr.by.all 
 
-${bin}/sum_anchor_reads_DPNII.py trans.corr.by.all > anchors.sum 
+python3 ${bin}/sum_anchor_reads_DPNII.py trans.corr.by.all > anchors.sum 
 
 avg=`cat anchors.sum | awk '{s+=$2;n++}END{print s/n}'`
 

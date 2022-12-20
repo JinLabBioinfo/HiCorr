@@ -1,3 +1,4 @@
+```
 git clone https://github.com/JinLabBioinfo/HiCorr.git
 chmod +x HiCorr/bin/preprocess/*
 chmod +x HiCorr/bin/*
@@ -29,3 +30,4 @@ cat frag_loop.$outputname.trans <(cat frag_loop.$outputname.trans | awk '{print 
 wait
 mv frag_loop.$outputname.cis.tmp frag_loop.$outputname.cis
 mv frag_loop.$outputname.trans.tmp frag_loop.$outputname.trans
+```

@@ -25,21 +25,18 @@ genome=hg38
 genome_fa_dir=./chroms/
 genome_chrom_size=./hg38.chrom.sizes.reformat
 blackregion=./hg38.blacklist.bed
-lib=HiCorr/bin/generateReference_lib/
+HiCorr_path=HiCorr/bin/generateReference_lib/
 output=./hg38_bin
 mkdir $output
 chmod +x $lib/*
 
 ## start build references #################################################################################
-# 1. generate fragment bed (500bp windows) file
 bedtools makewindows -g hg38.chrom.sizes.reformat -w 500 | awk '{print $1 "\t" $2+1 "\t" $3 "\t" "frag_"NR}' > hg38.500bp.bed
-
-# 2. generate ~5kb anchor (Here we average each fragment into ~5kb anchor)
 bedtools makewindows -g hg38.chrom.sizes.reformat -w 5000 | awk '{print $1 "\t" $2+1 "\t" $3 "\t" "A_"NR}' > hg38.5kb.bed
 bedtools intersect -wa -a hg38.5kb.bed -b hg38.blacklist.bed | cut -f1-4 | sort -u > hg38.5kb.bed.blacklist
 bedtools intersect -wa -wb -a hg38.500bp.bed -b hg38.5kb.bed | awk '{print $4 "\t" $8}' > hg38.500bp_5kb
-cp HiCorr/bin/dist.401.group hg38.dist.5kb.group
-
-$lib/get_group_statistics.pl ${genome}.full.matrix ${genome}_${enzyme}_anchors_avg.bed ${genome}_anchor_length.groups $genome.dist.5kb.group | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
+cp ${HiCorr_path}/bin/dist.401.group hg38.dist.5kb.group
+${HiCorr_path}/bin/generateReference_lib/list_full_matrix.pl hg38.5kb.bed 2000000 | python $lib/remove.blacklist.py hg38.5kb.bed.blacklist > hg38.full.filter.matrix &
+${HiCorr_path}/bin/microC/get_group_statistics.pl hg38.full.filter.matrix $genome.dist.5kb.group  | awk '{print $0,0}' OFS='\t' > $genome.full.dist.stat.5kb
 
 ```

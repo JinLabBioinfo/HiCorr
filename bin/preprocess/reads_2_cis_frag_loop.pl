@@ -4,7 +4,7 @@ use strict;
 my $usage = 	"Usage:./reads_2_cis_frag_loop.pl <frag_bed> <read_length> <inward_outfile> <outward_outfile> <samestrand_outfile> <count_summary_file> <expt> <reads file>\n".
 		"\tThis program takes reads summary txt file and output the cis- fragment looping files categoried based on inward, outward and samestrand reads.\n";
 
-my ($frag_bed, $len, $out_inward_file, $out_outward_file, $out_samestrand_file, $count_summary_file, $expt, $reads_file) = @ARGV;
+my ($frag_bed, $len, $out_inward_file, $out_outward_file, $out_samestrand_file, $expt, $reads_file) = @ARGV;
 if(not defined $expt){
 	die($usage);
 }
@@ -73,9 +73,6 @@ close(OUT_inward);
 close(OUT_outward);
 close(OUT_samestrand);
 
-open(SUMM, ">>$count_summary_file");
-print SUMM join("\t", $expt, $total_inter/2, $total_intra/2, $total_samestrand/2, $count_samestrand/2, $count_inward/2, $count_outward/2)."\n";
-close(SUMM);
 
 exit;
 

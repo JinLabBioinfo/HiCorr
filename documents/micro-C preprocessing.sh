@@ -32,7 +32,7 @@ samtools view $name.sorted.bam | $lib/remove_dup_PE_SAM_sorted.pl | samtools vie
 echo Total non-duplicated read pairs for $name is `samtools view $name.sorted.nodup.bam | wc -l | awk '{OFMT="%f"; print $1/2}'` >> summary.total.read_count
 # 5. categorize reads pair and map them to 500bp bin pairs
 samtools view $name.sorted.nodup.bam | cut -f2-8 | $lib/bam_to_temp_HiC.pl > $name.temp
-$lib/reads_2_cis_frag_loop.pl $bed 50 $name.loop.inward $name.loop.outward $name.loop.samestrand summary.frag_loop.read_count $name $name.temp & # 50 is read length for mapping
+$lib/reads_2_cis_frag_loop.pl $bed 50 $name.loop.inward $name.loop.outward $name.loop.samestrand $name $name.temp & # 50 is read length for mapping
 $lib/reads_2_trans_frag_loop.pl $bed 50 $name.loop.trans $name.temp & # 50 is read length for mapping
 wait
 for file in $name.loop.inward $name.loop.outward $name.loop.samestrand;do

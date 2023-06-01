@@ -12,7 +12,7 @@ with open(sys.argv[1],'r') as f:
 
 	for line in f:
 		
-		chr, beg, end, id, size = line.rstrip().split('\t')
+		chr, beg, end, id = line.rstrip().split('\t')[0:4]
 
 		bed.add(id)
 f.close()

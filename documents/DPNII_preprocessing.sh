@@ -13,8 +13,8 @@ bed=DPNII_HiCorr_ref/hg19.DPNII.frag.bed
 ###################################################################################################
 ### Note: you can use different mapper and read length for mapping ################################
 # 1. mapping, take 50bp for mapping
-cat $fq1 | $lib/reformat_fastq.py 1 50 | $bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R1.sam &
-cat $fq2 | $lib/reformat_fastq.py 1 50 | $bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R2.sam &
+cat $fq1 | $lib/reformat_fastq.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R1.sam &
+cat $fq2 | $lib/reformat_fastq.py 1 50 | bowtie -v 3 -m 1 --best --strata --time -p 10 --sam $hg19 - > $name.R2.sam &
 wait
 # 2. sam to sorted bam 
 echo Total reads count for $name is `samtools view $name.R1.sam | grep -vE ^@ | wc -l | awk '{OFMT="%f"; print $1}'` >> summary.total.read_count &

@@ -53,7 +53,7 @@ close(IN);
 close($curr_fh);
 my $file_list = join(" ", @temp_files);
 
-my $path=$bin."merge_sorted_frag_loop.pl";
+my $path=$bin."/merge_sorted_frag_loop.pl";
 `$path $file_list > temp.$loop_file`;
 `mv temp.$loop_file $loop_file`;
 `rm -r $folder`;

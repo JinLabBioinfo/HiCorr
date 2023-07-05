@@ -1,4 +1,4 @@
-
+l
 ### Heatmap
 Heatmap mode generates Hi-C heatmaps of a certain region you choosed(up to 2,000,000bp). This mode need to be run after either HindIII mode or eHiC mode, since it takes an anchor-to-anchor looping-pair file as input.
 <br/>

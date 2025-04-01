@@ -2,7 +2,8 @@
 - Download the code from this repository, "bin/eHiC/" <br/>
 - Download the reference files for eHiC (mm10/hg19 genome build)
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/eHiC_HiCorr.tar.gz
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/ref/eHiC_HiCorr.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/eHiC_HiCorr.tar.gz
 tar -xvf eHiC_HiCorr.tar.gz
 ```
 - Check the [preprocessing for eHiC data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh) <br/>

@@ -2,7 +2,8 @@
 - Download the code from this repository, "bin/Arima/" <br/>
 - Download the reference files for Arima (mm10/hg19 genome build)
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/Arima_HiCorr_ref.tar.gz
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/ref/Arima_HiCorr_ref.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/Arima_HiCorr_ref.tar.gz
 tar -xvf Arima_HiCorr_ref.tar.gz
 ```
 - Check the [preprocessing for Arima data (mapping, fragments filter, outs are cis and trans fragment loops)](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/Arima.preprocessing.sh) <br/>

@@ -2,7 +2,8 @@
 - Download the code from this repository, "bin/HindIII/" <br/>
 - Download the reference files for HindIII (mm10/hg19 genome build)
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HindIII_HiCorr_ref.tar.gz
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/ref/HindIII_HiCorr_ref.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HindIII_HiCorr_ref.tar.gz
 tar -xvf HindIII_HiCorr_ref.tar.gz
 ```
 - Check the [preprocessing for micor-C data (mapping, fragments filter, outs are cis and trans 500bp fragment loops)]([https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/micro-C%20preprocessing.sh](https://github.com/shanshan950/Hi-C-data-preprocess/blob/master/documents/Fastq-to-FragmentContact.Tissue_example.md)) <br/>

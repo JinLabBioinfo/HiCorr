@@ -3,7 +3,8 @@
 ## Download reference files
 Run the commands below, you will directory "ref/".</br>
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/HiCorr.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files
 tar -xvf HiCorr.tar.gz 
 ls 
 ls ref/

@@ -4,7 +4,8 @@
 git clone https://github.com/JinLabBioinfo/HiCorr.git
 chmod +x HiCorr/bin/preprocess/*
 chmod +x HiCorr/bin/*
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/DPNII_HiCorr_ref.tar.gz
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/ref/DPNII_HiCorr_ref.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/ref/DPNII_HiCorr_ref.tar.gz
 tar -xvf DPNII_HiCorr_ref.tar.gz
 
 lib=HiCorr/bin/preprocess/ # the path to lib of the Hi-C-data-preprocess 

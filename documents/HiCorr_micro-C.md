@@ -2,7 +2,8 @@
 - Download the code from this repository, "bin/microC/" <br/>
 - Download the reference files for micro-C (mm10/hg19 genome build)
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/microC_HiCorr.tar.gz
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/microC_HiCorr.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/microC_HiCorr.tar.gz
 tar -xvf microC_HiCorr.tar.gz
 chmod 775 HiCorr/bin/microC/*
 ```

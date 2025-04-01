@@ -5,7 +5,8 @@ In each subdirectory, there are reference files for genome build hg19 and mm10. 
 [More descriptions for the reference files](https://github.com/JinLabBioinfo/HiCorr/blob/master/documents/reference_file_description.md).</br>
 
 ```
-wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files 
+wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/HiCorr.tar.gz
+# old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr.tar.gz # download reference files 
 # It needs ~103G space after decompress
 tar -xvf HiCorr.tar.gz 
 ls

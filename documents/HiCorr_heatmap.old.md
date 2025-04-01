@@ -7,7 +7,8 @@ To run the Heatmap mode: <br/>
 Example run: <br/>
    #### Download test dataset for H9 chr11 (restriction enzyme: HindIII; genome build:hg19) from GSE130711
    ```
-   wget http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/HiCorr_output.tar.gz 
+   wget --no-check-certificate https://hiview10.gene.cwru.edu/public/DeepLoop_ref/HiCorr_test_data/HiCorr_output.tar.gz
+   # old path: http://hiview.case.edu/ssz20/tmp.HiCorr.ref/HiCorr_test_data/HiCorr_output.tar.gz 
    tar -xvf HiCorr_output.tar.gz
    ls
    ls HiCorr_output
